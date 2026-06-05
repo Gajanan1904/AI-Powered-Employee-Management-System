@@ -1,0 +1,230 @@
+.ai-predictor-root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ai-split-grid {
+  display: grid;
+  grid-template-columns: 5.2fr 6.8fr;
+  gap: 24px;
+}
+
+.ai-form-panel {
+  padding: 28px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-block-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+.ai-meta-intro {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.ai-evaluation-inputs-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.ai-results-viewport {
+  width: 100%;
+}
+
+/* Idle State Brain Pulse */
+.ai-idle-results-card {
+  padding: 40px !important;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  height: 100%;
+  border: 1px solid var(--border-color);
+}
+
+.ai-brain-pulse {
+  font-size: 4rem;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-idle-results-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.ai-idle-results-card p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+/* Scanning Overlay */
+.ai-scanning-progress-card {
+  padding: 40px !important;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  height: 100%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.cyber-gear-spinner {
+  width: 64px;
+  height: 64px;
+  border: 3px solid rgba(6, 182, 212, 0.15);
+  border-top-color: var(--color-secondary);
+  border-radius: 50%;
+  animation: recaptcha-spin 1s linear infinite;
+  margin-bottom: 24px;
+  box-shadow: 0 0 15px var(--color-secondary-glow);
+}
+
+.scanning-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-secondary);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.scanning-subtitle {
+  font-family: var(--font-header);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 32px;
+}
+
+.scanning-sub-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* AI prediction results detail card */
+.ai-results-details-card {
+  padding: 32px !important;
+  text-align: left;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.ai-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+.ai-results-header h4 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.results-badge {
+  font-family: var(--font-header);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.05em;
+}
+
+.ai-target-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 2px;
+}
+
+.ai-target-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  display: block;
+}
+
+.ai-donut-gauges-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-bottom: 28px;
+  background-color: var(--bg-input);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.ai-predictions-text-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.pred-txt-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
+.pred-txt-row:last-child {
+  border-bottom: none;
+}
+.pred-txt-row span {
+  color: var(--text-secondary);
+}
+.pred-txt-row strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Auditing Logs section */
+.ai-predictions-history-logs {
+  padding: 28px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .ai-split-grid {
+    grid-template-columns: 1fr;
+  }
+}

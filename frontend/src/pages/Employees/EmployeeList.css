@@ -1,0 +1,311 @@
+.employee-list-root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.directory-tools-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px !important;
+  gap: 16px;
+}
+.directory-tools-row .search-bar-container {
+  margin-bottom: 0;
+}
+
+.directory-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* View Mode Switcher */
+.view-toggle-grp {
+  display: flex;
+  background-color: var(--bg-input);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.toggle-btn.active {
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Table profiles cell */
+.table-profile-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.table-cell-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-color);
+}
+
+.table-cell-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.cell-name-link {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+.cell-name-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.cell-sub-id {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.dept-cell-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-input);
+  color: var(--text-secondary);
+}
+
+/* Rating meter in table */
+.rating-progress-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+}
+
+.progress-bar-bg {
+  flex: 1;
+  height: 6px;
+  background-color: var(--bg-input);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+.rating-percentage {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+/* Actions column buttons */
+.table-actions-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-actions-cell button {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.table-actions-cell button:hover {
+  transform: translateY(-1px);
+}
+.action-view-btn:hover { background-color: var(--color-primary-glow) !important; border-color: rgba(99, 102, 241, 0.3) !important; }
+.action-edit-btn:hover { background-color: var(--color-secondary-glow) !important; border-color: rgba(6, 182, 212, 0.3) !important; }
+.action-delete-btn:hover { background-color: rgba(244, 63, 94, 0.1) !important; border-color: rgba(244, 63, 94, 0.3) !important; }
+
+/* Grid layout view */
+.grid-responsive-viewport {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.employee-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.employee-grid-card {
+  position: relative;
+  text-align: center;
+  padding: 24px !important;
+}
+
+.grid-card-status-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.grid-card-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.grid-card-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+  margin-bottom: 12px;
+  transition: border-color var(--transition-fast);
+}
+.employee-grid-card:hover .grid-card-avatar {
+  border-color: var(--color-primary);
+}
+
+.grid-card-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.grid-card-id {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.grid-card-details {
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 0;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.grid-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.88rem;
+}
+.grid-detail-row span {
+  color: var(--text-secondary);
+}
+.grid-detail-row strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.grid-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.grid-card-actions button {
+  flex: 1;
+}
+
+.action-delete-btn-grid {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+.action-delete-btn-grid:hover {
+  background-color: rgba(244, 63, 94, 0.1);
+  border-color: rgba(244, 63, 94, 0.3);
+  color: #ef4444;
+}
+
+/* Modals inputs grouping */
+.modal-crud-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.delete-alert-warning {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.delete-alert-warning strong {
+  color: var(--text-primary);
+}
+
+.directory-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px !important;
+  color: var(--text-muted);
+  font-family: var(--font-header);
+  font-size: 1rem;
+}
+
+.grid-pagination-box {
+  padding: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .directory-tools-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .directory-actions {
+    justify-content: space-between;
+  }
+}

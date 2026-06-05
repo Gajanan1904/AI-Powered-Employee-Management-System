@@ -1,0 +1,128 @@
+.recaptcha-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px !important;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  width: 100%;
+  max-width: 320px;
+  height: 76px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.recaptcha-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recaptcha-checkbox {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--text-muted);
+  background: var(--bg-card);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  padding: 0;
+  outline: none;
+}
+
+.recaptcha-checkbox.idle:hover {
+  border-color: var(--text-secondary);
+  box-shadow: 0 0 4px var(--color-primary-glow);
+}
+
+.recaptcha-checkbox.loading {
+  cursor: wait;
+  border-color: transparent;
+  background: transparent;
+}
+
+.recaptcha-checkbox.verified {
+  border-color: transparent;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.recaptcha-spinner {
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid rgba(99, 102, 241, 0.2);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: recaptcha-spin 0.8s linear infinite;
+}
+
+.recaptcha-checkmark {
+  width: 20px;
+  height: 20px;
+}
+
+.recaptcha-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.recaptcha-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.recaptcha-logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.recaptcha-logo {
+  opacity: 0.8;
+}
+
+.recaptcha-brand-text {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.recaptcha-privacy-links {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.recaptcha-privacy-links a {
+  color: var(--text-muted);
+}
+.recaptcha-privacy-links a:hover {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
+@keyframes recaptcha-spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-scale {
+  animation: scale-up 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes scale-up {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

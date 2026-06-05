@@ -1,0 +1,85 @@
+.svg-chart-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+.svg-chart-element {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.chart-axis-text {
+  font-family: var(--font-header);
+  font-size: 8px;
+  fill: var(--text-muted);
+  font-weight: 550;
+  user-select: none;
+}
+
+.chart-line-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: chart-draw 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.chart-bar-rect {
+  transform-origin: bottom;
+  animation: chart-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.chart-grid-line line {
+  stroke: var(--border-color);
+  opacity: 0.75;
+}
+
+.chart-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  font-family: var(--font-header);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Donut Chart styles */
+.donut-chart-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.donut-percentage-ring {
+  transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.donut-text-val {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.donut-text-lbl {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Keyframes */
+@keyframes chart-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes chart-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}

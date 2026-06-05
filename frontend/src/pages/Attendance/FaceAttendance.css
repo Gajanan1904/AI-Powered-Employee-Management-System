@@ -1,0 +1,67 @@
+.face-attendance-page-root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.face-att-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.face-att-back-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color var(--transition-fast);
+  outline: none;
+}
+.face-att-back-btn:hover {
+  color: var(--color-primary);
+}
+
+.face-att-sub-badge {
+  font-family: var(--font-header);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  background-color: var(--color-primary-glow);
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+}
+
+.face-scanner-core-viewport {
+  width: 100%;
+}
+
+.face-scanner-footer-meta {
+  padding: 16px !important;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.01) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-muted);
+  text-align: left;
+  border-radius: var(--radius-md) !important;
+}
+
+.face-scanner-footer-meta strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+}
+
+.face-scanner-footer-meta p {
+  line-height: 1.5;
+  margin: 0;
+}

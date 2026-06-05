@@ -1,0 +1,125 @@
+.user-profile-page-root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.user-profile-grid {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: 24px;
+}
+
+.profile-side-avatar-card, .profile-edit-bio-panel {
+  padding: 32px !important;
+}
+
+/* Left side Card */
+.avatar-card-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.user-master-profile-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3.5px solid var(--color-primary);
+  box-shadow: 0 0 20px var(--color-primary-glow);
+  margin-bottom: 14px;
+}
+
+.profile-badge-active {
+  font-family: var(--font-header);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.avatar-card-top h3 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.profile-card-role {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.profile-card-loc {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.profile-card-biometrics {
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.biometric-tag-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+.biometric-tag-row span {
+  color: var(--text-secondary);
+}
+.biometric-tag-row strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Right side edit details */
+.profile-edit-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.profile-edit-meta {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 14px;
+  text-align: left;
+}
+
+.profile-edit-details-form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.bio-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.bio-textarea {
+  resize: vertical;
+}
+
+@media (max-width: 900px) {
+  .user-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

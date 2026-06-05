@@ -1,0 +1,87 @@
+.input-group-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-label {
+  display: block;
+  font-family: var(--font-header);
+  font-weight: 550;
+  font-size: 0.92rem;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+.label-required {
+  color: var(--color-danger);
+}
+
+.input-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.input-field:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+  background-color: var(--bg-card);
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color var(--transition-fast);
+  outline: none;
+}
+
+.password-toggle-btn:hover {
+  color: var(--text-secondary);
+}
+
+.pass-toggle-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Error States */
+.has-error .input-field {
+  border-color: var(--color-danger);
+  background-color: rgba(244, 63, 94, 0.02);
+}
+
+.has-error .input-field:focus {
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+}
+
+.input-error-msg {
+  color: var(--color-danger);
+  font-size: 0.82rem;
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-weight: 500;
+}

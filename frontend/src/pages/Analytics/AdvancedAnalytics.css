@@ -1,0 +1,177 @@
+.advanced-analytics-root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.analytics-metrics-overview-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.analytics-widget {
+  padding: 24px !important;
+  text-align: center;
+}
+
+.analytics-split-grid {
+  display: grid;
+  grid-template-columns: 7.2fr 4.8fr;
+  gap: 24px;
+}
+
+.analytics-leaderboard-panel, .analytics-intervention-panel {
+  padding: 28px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.analytics-block-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+.text-red-block {
+  border-color: rgba(244, 63, 94, 0.2);
+  color: var(--color-danger);
+}
+
+.rank-tag {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+}
+
+.standings-badges-count {
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+/* Intervention lists */
+.intervention-meta-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.intervention-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.intervention-item-card {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.glow-danger {
+  border-color: rgba(244, 63, 94, 0.2) !important;
+}
+.dark-theme .glow-danger {
+  box-shadow: 0 0 10px rgba(244, 63, 94, 0.05) !important;
+}
+
+.item-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.intervention-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--color-danger);
+}
+
+.item-profile-texts h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.item-profile-texts span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.intervention-meta-details {
+  display: flex;
+  gap: 16px;
+  border-top: 1px dashed var(--border-color);
+  border-bottom: 1px dashed var(--border-color);
+  padding: 8px 0;
+}
+
+.meta-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.meta-box span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-header);
+}
+.meta-box strong {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.intervention-coaching-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+}
+.intervention-coaching-box span {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--color-danger);
+  display: block;
+  margin-bottom: 2px;
+}
+.intervention-coaching-box p {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.intervention-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-family: var(--font-header);
+  font-size: 0.95rem;
+}
+
+.analytics-dept-charts-row {
+  padding: 28px !important;
+}
+
+@media (max-width: 1024px) {
+  .analytics-split-grid {
+    grid-template-columns: 1fr;
+  }
+}
