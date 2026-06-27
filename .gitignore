@@ -45,6 +45,7 @@ htmlcov/
 # ==========================
 *.joblib
 *.pkl
+!EMS/ml_model/saved_model/employee_model.pkl
 *.h5
 *.keras
 *.onnx
