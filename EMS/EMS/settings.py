@@ -158,6 +158,7 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://ai-powered-employee-management-syst.vercel.app",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
