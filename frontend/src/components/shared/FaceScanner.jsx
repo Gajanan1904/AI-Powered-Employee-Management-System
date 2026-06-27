@@ -76,7 +76,7 @@ const FaceScanner = ({ onScanComplete }) => {
   try {
 
     const response = await fetch(
-      "http://127.0.0.1:8000/face-auth/verify/"
+       `${import.meta.env.VITE_API_BASE}/face-auth/verify/`
     );
 
     const data = await response.json();
@@ -176,7 +176,7 @@ const restartCamera = () => {
     const image = canvas.toDataURL("image/jpeg");
 
     const response = await fetch(
-      "http://127.0.0.1:8000/face-auth/verify/",
+       `${import.meta.env.VITE_API_BASE}/face-auth/verify/`
       {
         method: "POST",
         headers: {

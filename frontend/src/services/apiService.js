@@ -47,7 +47,7 @@ export const apiService = {
 
   createEmployee: async (employeeData) => {
     delete cacheStore['employees'];
-    const res = await axiosInstance.post('/employees/', employeeData);
+    const res = await axiosInstance.post('/employees/create/', employeeData);
     delete cacheStore['employees'];
     return res;
   },
@@ -55,7 +55,7 @@ export const apiService = {
   updateEmployee: async (id, updatedData) => {
     delete cacheStore['employees'];
     delete cacheStore[`employee_${id}`];
-    const res = await axiosInstance.put(`/employees/${id}/`, updatedData);
+    const res = await axiosInstance.put(`/employees/update/${id}/`, updatedData);
     delete cacheStore['employees'];
     delete cacheStore[`employee_${id}`];
     return res;
@@ -64,7 +64,7 @@ export const apiService = {
   deleteEmployee: async (id) => {
     delete cacheStore['employees'];
     delete cacheStore[`employee_${id}`];
-    const res = await axiosInstance.delete(`/employees/${id}/`);
+    const res = await axiosInstance.delete(`/employees/delete/${id}/`);
     delete cacheStore['employees'];
     return res;
   },
