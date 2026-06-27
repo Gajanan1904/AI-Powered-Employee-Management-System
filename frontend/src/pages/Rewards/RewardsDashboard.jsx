@@ -4,6 +4,8 @@ import Loader from '../../components/common/Loader';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Alert from '../../components/common/Alert';
+import Avatar from '../../components/common/Avatar';
+import Modal from '../../components/common/Modal';
 import './RewardsDashboard.css';
 
 const RewardsDashboard = () => {
@@ -24,18 +26,36 @@ const RewardsDashboard = () => {
 
   const loadRewardsData = async () => {
     try {
-      const empRes = await apiService.getEmployees();
-      const badgeRes = await apiService.getBadges();
-      
-      // Sort employees by reward points descending for standings
-      const sortedEmps = [...empRes.data].sort((a, b) => b.rewardPoints - a.rewardPoints);
-      
+      const empRes = await apiService.getLeaderboard();
+      const sortedEmps = [...empRes.data].sort(
+        (a, b) => b.rewardPoints - a.rewardPoints
+      );
+
       setEmployees(sortedEmps);
-      setBadges(badgeRes.data);
+
+      setBadges([
+        {
+          name: "Gold",
+          icon: "🥇",
+          description: "Top level achievement"
+        },
+        {
+          name: "Silver",
+          icon: "🥈",
+          description: "Excellent performer"
+        },
+        {
+          name: "Bronze",
+          icon: "🥉",
+          description: "Consistent contributor"
+        }
+      ]);
+
       if (sortedEmps.length > 0 && !selectedEmpId) {
         setSelectedEmpId(sortedEmps[0].id);
       }
     } catch (err) {
+      console.error(err);
       setErrorMsg('Failed to synchronize rewards leaderboard.');
     } finally {
       setLoading(false);
@@ -57,11 +77,11 @@ const RewardsDashboard = () => {
     setErrorMsg('');
     setSuccessMsg('');
 
-    const targetEmp = employees.find((emp) => emp.id === selectedEmpId);
+    const targetEmp = employees.find((emp) => String(emp.id) === String(selectedEmpId));
 
     try {
       await apiService.addRewardPoints(selectedEmpId, parseInt(awardPoints), awardReason);
-      setSuccessMsg(`Awarded +${awardPoints} points to ${targetEmp?.name} successfully!`);
+      setSuccessMsg(`Awarded +${awardPoints} points to ${targetEmp?.name || 'employee'} successfully!`);
       setAwardReason('');
       setAwardPoints(100);
       loadRewardsData();
@@ -90,7 +110,7 @@ const RewardsDashboard = () => {
           {podium[1] && (
             <div className="podium-spot spot-silver animate-fade-in">
               <div className="podium-avatar-wrapper">
-                <img src={podium[1].avatar} alt={podium[1].name} />
+                <Avatar src={podium[1].avatar} name={podium[1].name} className="podium-avatar-img" />
                 <span className="medal-tag">2</span>
               </div>
               <h4 className="podium-name">{podium[1].name}</h4>
@@ -103,7 +123,7 @@ const RewardsDashboard = () => {
           {podium[0] && (
             <div className="podium-spot spot-gold animate-fade-in">
               <div className="podium-avatar-wrapper">
-                <img src={podium[0].avatar} alt={podium[0].name} />
+                <Avatar src={podium[0].avatar} name={podium[0].name} className="podium-avatar-img gold-avatar-img" />
                 <span className="medal-tag">1</span>
               </div>
               <h4 className="podium-name">{podium[0].name}</h4>
@@ -116,7 +136,7 @@ const RewardsDashboard = () => {
           {podium[2] && (
             <div className="podium-spot spot-bronze animate-fade-in">
               <div className="podium-avatar-wrapper">
-                <img src={podium[2].avatar} alt={podium[2].name} />
+                <Avatar src={podium[2].avatar} name={podium[2].name} className="podium-avatar-img" />
                 <span className="medal-tag">3</span>
               </div>
               <h4 className="podium-name">{podium[2].name}</h4>
@@ -164,37 +184,37 @@ const RewardsDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((emp, index) => (
-                  <tr key={emp.id}>
-                    <td>
-                      <span className={`rank-badge rank-${index + 1}`}>#{index + 1}</span>
-                    </td>
-                    <td>
-                      <div className="profile-cell-mini">
-                        <img src={emp.avatar} alt={emp.name} className="avatar-mini" />
-                        <div className="profile-cell-texts">
-                          <strong>{emp.name}</strong>
-                          <span>{emp.id}</span>
+                {employees.map((emp, index) => {
+                  const empCode = emp.employee_code || emp.employee_id || (typeof emp.employee === 'string' && emp.employee.startsWith('EMP') ? emp.employee : `EMP00${emp.id}`);
+                  return (
+                    <tr key={emp.id}>
+                      <td>
+                        <span className={`rank-badge rank-${index + 1}`}>#{index + 1}</span>
+                      </td>
+                      <td>
+                        <div className="profile-cell-mini">
+                          <Avatar src={emp.avatar} name={emp.name} className="avatar-mini" />
+                          <div className="profile-cell-texts">
+                            <strong className="profile-name-bold">{emp.name}</strong>
+                            <span className="profile-meta-sub">{empCode}</span>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <strong className="standings-pts-text">🏆 {emp.rewardPoints}</strong>
-                    </td>
-                    <td>
-                      <div className="badges-inline-tags">
-                        {emp.badges.slice(0, 2).map((b) => (
-                          <span key={b} className="badge-tag-inline" title={b}>
-                            {b === 'Innovator' ? '💡' : b === 'Team Pillar' ? '🤝' : b === 'Speedster' ? '⚡' : '✨'}
-                          </span>
-                        ))}
-                        {emp.badges.length > 2 && (
-                          <span className="badge-tag-inline-more">+{emp.badges.length - 2}</span>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      <td>
+                        <strong className="standings-pts-text">🏆 {emp.rewardPoints}</strong>
+                      </td>
+                      <td>
+                        <span className="badge-tag-inline">
+                          {emp.badge === 'Gold'
+                            ? '🥇'
+                            : emp.badge === 'Silver'
+                            ? '🥈'
+                            : '🥉'}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -214,7 +234,7 @@ const RewardsDashboard = () => {
               >
                 {employees.map((emp) => (
                   <option key={emp.id} value={emp.id}>
-                    {emp.name} ({emp.id}) - Standings: {emp.rewardPoints} Pts
+                    {emp.name} ({emp.employee_code || emp.employee_id || `EMP00${emp.id}`}) - {emp.rewardPoints} Pts
                   </option>
                 ))}
               </select>

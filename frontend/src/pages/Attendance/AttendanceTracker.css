@@ -62,37 +62,85 @@
   display: grid;
   grid-template-columns: 7fr 5fr;
   gap: 24px;
+  align-items: start;
 }
 
 .attendance-left-table, .attendance-right-calendar {
-  padding: 28px !important;
+  padding: 24px !important;
   display: flex;
   flex-direction: column;
+}
+
+.attendance-left-table {
+  min-height: 520px;
+  justify-content: space-between;
 }
 
 .tracker-block-title {
   font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 12px;
   text-align: left;
+}
+
+/* Vertically Scrollable Table Body Container */
+.attendance-left-table .table-responsive-container {
+  max-height: 420px;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
 }
 
 /* Table profile mini cell */
 .profile-cell-mini {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-align: left;
 }
 
 .avatar-mini {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
   border: 1.5px solid var(--border-color);
+  font-size: 1rem;
+}
+
+.profile-cell-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.profile-name-bold {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.profile-meta-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Pagination container inside left table card */
+.attendance-pagination-box {
+  margin-top: 16px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+}
+.attendance-pagination-box .pagination-wrapper {
+  padding: 0;
+  border: none;
+  background: transparent;
 }
 
 /* Manual Status Toggles */

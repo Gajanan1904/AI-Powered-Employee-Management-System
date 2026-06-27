@@ -110,8 +110,17 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  object-fit: cover;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.9rem;
   border: 1.5px solid var(--color-primary);
+  flex-shrink: 0;
+  user-select: none;
 }
 
 .navbar-username {

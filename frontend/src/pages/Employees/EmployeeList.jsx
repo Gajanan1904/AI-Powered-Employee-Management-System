@@ -8,6 +8,7 @@ import Modal from '../../components/common/Modal';
 import Input from '../../components/common/Input';
 import Alert from '../../components/common/Alert';
 import Pagination from '../../components/common/Pagination';
+import Avatar from '../../components/common/Avatar';
 import './EmployeeList.css';
 
 const EmployeeList = () => {
@@ -147,11 +148,20 @@ const EmployeeList = () => {
     }
   };
 
+  // Reset pagination to page 1 on search or filter change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, deptFilter]);
+
   // Filter Logic
   const filteredEmployees = employees.filter((emp) => {
-    const matchesSearch =
-      emp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      emp.id.toLowerCase().includes(searchQuery.toLowerCase());
+    const nameStr = emp.name ? String(emp.name).toLowerCase() : '';
+    const idStr = emp.id !== undefined && emp.id !== null ? String(emp.id).toLowerCase() : '';
+    const codeStr = emp.emp_code ? String(emp.emp_code).toLowerCase() : '';
+    const emailStr = emp.email ? String(emp.email).toLowerCase() : '';
+    const query = searchQuery.toLowerCase().trim();
+
+    const matchesSearch = !query || nameStr.includes(query) || idStr.includes(query) || codeStr.includes(query) || emailStr.includes(query);
     const matchesDept = deptFilter === 'All' || emp.department === deptFilter;
     return matchesSearch && matchesDept;
   });
@@ -239,7 +249,7 @@ const EmployeeList = () => {
                 <tr key={emp.id}>
                   <td>
                     <div className="table-profile-cell">
-                      <img src={emp.avatar} alt={emp.name} className="table-cell-avatar" />
+                      <Avatar src={emp.avatar} name={emp.name} className="table-cell-avatar" />
                       <div className="table-cell-texts">
                         <strong className="cell-name-link" onClick={() => navigate(`/employees/${emp.id}`)}>
                           {emp.name}
@@ -307,7 +317,7 @@ const EmployeeList = () => {
                   </span>
                 </div>
                 <div className="grid-card-top" onClick={() => navigate(`/employees/${emp.id}`)}>
-                  <img src={emp.avatar} alt={emp.name} className="grid-card-avatar" />
+                  <Avatar src={emp.avatar} name={emp.name} className="grid-card-avatar" />
                   <h4 className="grid-card-name">{emp.name}</h4>
                   <span className="grid-card-id">{emp.id}</span>
                 </div>

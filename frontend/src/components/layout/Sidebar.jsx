@@ -119,8 +119,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             </svg>
           </div>
           <div className="brand-texts">
-            <span className="brand-main">HR CORE</span>
-            <span className="brand-sub">AI PREDICTIVE SUITE</span>
+            <span className="brand-main">Employee_Hub</span>
           </div>
         </div>
 
@@ -142,7 +141,9 @@ const Sidebar = ({ isOpen, onClose }) => {
         {user && (
           <div className="sidebar-footer-user">
             <div className="user-info-row">
-              <img src={user.avatar} alt={user.name} className="user-avatar-sd" />
+              <div className="user-avatar-sd">
+                {user.name ? user.name.trim().charAt(0).toUpperCase() : 'G'}
+              </div>
               <div className="user-texts">
                 <span className="user-name-sd">{user.name}</span>
                 <span className="user-role-sd">{user.role}</span>
@@ -156,6 +157,9 @@ const Sidebar = ({ isOpen, onClose }) => {
               </svg>
               <span>Logout</span>
             </button>
+            <div className="sidebar-last-sync-row">
+              <span>🔄 Last sync: Just now 🔄</span>
+            </div>
           </div>
         )}
       </aside>

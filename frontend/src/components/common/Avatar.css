@@ -1,0 +1,13 @@
+.avatar-initial-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: #ffffff;
+  font-family: var(--font-header);
+  font-weight: 700;
+  border-radius: 50%;
+  user-select: none;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px var(--color-primary-glow);
+}

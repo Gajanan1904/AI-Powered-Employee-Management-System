@@ -1,30 +1,31 @@
+/* Requirement 3: Reduced vertical spacing between sections */
 .rewards-dashboard-root {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .rewards-block-title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
+  padding-bottom: 8px;
   text-align: left;
 }
 
 /* Podium section */
 .rewards-podium-section {
-  padding: 32px !important;
+  padding: 20px !important;
 }
 
 .podium-container {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 32px;
-  min-height: 240px;
-  padding-top: 20px;
+  gap: 24px;
+  min-height: 180px;
+  padding-top: 10px;
 }
 
 .podium-spot {
@@ -36,15 +37,22 @@
 
 .podium-avatar-wrapper {
   position: relative;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-.podium-avatar-wrapper img {
+.podium-avatar-img {
   width: 64px;
   height: 64px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid transparent;
+  font-size: 1.5rem;
+}
+
+.gold-avatar-img {
+  width: 76px;
+  height: 76px;
+  font-size: 1.8rem;
 }
 
 .medal-tag {
@@ -60,22 +68,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 }
 
 .podium-name {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--text-primary);
   margin-bottom: 2px;
 }
 
 .podium-pts {
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-primary);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .podium-pedestal {
@@ -85,7 +94,7 @@
   justify-content: center;
   font-family: var(--font-header);
   font-weight: 800;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   letter-spacing: 0.05em;
   color: #ffffff;
   border-top-left-radius: var(--radius-sm);
@@ -93,45 +102,44 @@
 }
 
 /* Spot Gold */
-.spot-gold .podium-avatar-wrapper img { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
+.spot-gold .podium-avatar-img { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
 .spot-gold .medal-tag { background-color: #fbbf24; }
-.spot-gold .podium-avatar-wrapper img { width: 76px; height: 76px; }
-.pedestal-1 { height: 90px; background: linear-gradient(180deg, #fbbf24, #d97706); }
+.pedestal-1 { height: 75px; background: linear-gradient(180deg, #fbbf24, #d97706); }
 
 /* Spot Silver */
-.spot-silver .podium-avatar-wrapper img { border-color: #94a3b8; box-shadow: 0 0 15px rgba(148, 163, 184, 0.2); }
+.spot-silver .podium-avatar-img { border-color: #94a3b8; box-shadow: 0 0 15px rgba(148, 163, 184, 0.2); }
 .spot-silver .medal-tag { background-color: #94a3b8; }
-.pedestal-2 { height: 60px; background: linear-gradient(180deg, #94a3b8, #64748b); }
+.pedestal-2 { height: 50px; background: linear-gradient(180deg, #94a3b8, #64748b); }
 
 /* Spot Bronze */
-.spot-bronze .podium-avatar-wrapper img { border-color: #b45309; box-shadow: 0 0 15px rgba(180, 83, 9, 0.2); }
+.spot-bronze .podium-avatar-img { border-color: #b45309; box-shadow: 0 0 15px rgba(180, 83, 9, 0.2); }
 .spot-bronze .medal-tag { background-color: #b45309; }
-.pedestal-3 { height: 40px; background: linear-gradient(180deg, #b45309, #78350f); }
+.pedestal-3 { height: 35px; background: linear-gradient(180deg, #b45309, #78350f); }
 
 /* Badges catalog directory */
 .rewards-badges-catalog-section {
-  padding: 28px !important;
+  padding: 20px !important;
 }
 
 .badges-intro-meta {
   font-family: var(--font-body);
   font-size: 0.88rem;
   color: var(--text-secondary);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   text-align: left;
 }
 
 .achieve-badges-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .badge-catalog-card {
   background-color: var(--bg-input);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 12px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -146,8 +154,8 @@
 }
 
 .badge-catalog-emoji {
-  font-size: 2.2rem;
-  margin-bottom: 8px;
+  font-size: 2rem;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,13 +164,13 @@
 .badge-catalog-name {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .badge-details-link {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--color-primary);
   font-weight: 600;
 }
@@ -171,11 +179,81 @@
 .rewards-split-grid {
   display: grid;
   grid-template-columns: 7.2fr 4.8fr;
-  gap: 24px;
+  gap: 18px;
+  align-items: start; /* Requirement 2: Prevents card stretching */
 }
 
-.rewards-standings-panel, .rewards-award-panel {
-  padding: 28px !important;
+.rewards-standings-panel {
+  padding: 20px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Requirement 2: Award form fits content height */
+.rewards-award-panel {
+  padding: 20px !important;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+/* Requirement 1: Independently scrollable leaderboard table max-height 450px */
+.rewards-standings-panel .table-responsive-container {
+  max-height: 450px;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+.rewards-standings-panel .custom-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.rewards-standings-panel .custom-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--bg-card);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.profile-cell-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.avatar-mini {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-color);
+  font-size: 0.95rem;
+}
+
+.profile-cell-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.profile-name-bold {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.profile-meta-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .rank-badge {
@@ -195,11 +273,6 @@
   color: var(--color-primary);
 }
 
-.badges-inline-tags {
-  display: flex;
-  gap: 6px;
-}
-
 .badge-tag-inline {
   width: 22px;
   height: 22px;
@@ -212,15 +285,15 @@
   font-size: 0.75rem;
 }
 
-.badge-tag-inline-more {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  align-self: center;
-}
-
+/* Requirement 2: Award form fields compact spacing and button placement */
 .award-points-form {
   text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.award-points-form .form-group {
+  margin-bottom: 14px;
 }
 
 /* Badge criteria modal */
@@ -232,16 +305,16 @@
 }
 
 .criteria-emoji {
-  font-size: 3.5rem;
-  margin-bottom: 12px;
+  font-size: 3rem;
+  margin-bottom: 10px;
 }
 
 .criteria-desc {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: var(--text-secondary);
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .criteria-metric-block {
@@ -249,23 +322,23 @@
   background-color: var(--bg-input);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 14px;
   text-align: left;
 }
 
 .criteria-metric-block strong {
   display: block;
   font-family: var(--font-header);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-primary);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .criteria-metric-block ul {
   padding-left: 18px;
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.5;
   color: var(--text-secondary);
 }
 
@@ -278,7 +351,7 @@
   .podium-container {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
   }
   .podium-spot {
     width: 100%;

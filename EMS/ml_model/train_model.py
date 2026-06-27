@@ -6,21 +6,22 @@ from sklearn.metrics import mean_absolute_error
 import joblib
 
 # Load Dataset
-df = pd.read_csv('dataset/hr_dataset_v2.csv')
+df = pd.read_csv('../dataset/hr_dataset_v2.csv')
+
 
 # Convert column names to lowercase
 df.columns = df.columns.str.lower()
+df['attendance'] = (df['attendance'] / 29) * 100
 
-# Encode categorical columns
-le_department = LabelEncoder()
-le_designation = LabelEncoder()
-le_badge = LabelEncoder()
+print("\nTOP 20 BY REWARD POINTS")
+print(
+    df[['attendance','communication','teamwork',
+        'innovation','task_completion',
+        'reward_points','final_score']]
+    .sort_values(by='reward_points', ascending=False)
+    .head(20)
+)
 
-df['department'] = le_department.fit_transform(df['department'])
-
-df['designation'] = le_designation.fit_transform(df['designation'])
-
-df['badge'] = le_badge.fit_transform(df['badge'])
 
 # Features
 X = df[[
@@ -29,10 +30,7 @@ X = df[[
     'teamwork',
     'innovation',
     'task_completion',
-    'reward_points',
-    'department',
-    'designation',
-    'badge'
+    'reward_points'
 ]]
 
 # Target
@@ -60,7 +58,7 @@ error = mean_absolute_error(y_test, y_pred)
 print(f"Mean Absolute Error: {error:.2f}")
 
 # Save Model
-joblib.dump(model, 'ml_model/saved_model/employee_model.pkl')
+joblib.dump(model, 'saved_model/employee_model.pkl')
 
 print("ML Model Trained Successfully!")
 

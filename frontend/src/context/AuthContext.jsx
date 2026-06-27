@@ -13,8 +13,23 @@ export const AuthProvider = ({ children }) => {
     const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
 
     if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser && (parsedUser.name === 'Sarah Connor' || parsedUser.name === 'Gajanan Bidwai')) {
+          parsedUser.name = 'Gajanan Bidwai';
+          parsedUser.avatar = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120';
+          if (localStorage.getItem('user')) {
+            localStorage.setItem('user', JSON.stringify(parsedUser));
+          }
+          if (sessionStorage.getItem('user')) {
+            sessionStorage.setItem('user', JSON.stringify(parsedUser));
+          }
+        }
+        setToken(storedToken);
+        setUser(parsedUser);
+      } catch (e) {
+        console.error('Error parsing stored user:', e);
+      }
     }
     setLoading(false);
   }, []);
@@ -29,7 +44,7 @@ export const AuthProvider = ({ children }) => {
       const mockToken = 'mock-jwt-token-xyz-12345';
       const mockUser = {
         id: '1',
-        name: 'Sarah Connor',
+        name: 'Gajanan Bidwai',
         email: 'admin@enterprise.com',
         role: 'Chief HR Officer',
         avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120'

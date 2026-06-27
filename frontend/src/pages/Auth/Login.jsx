@@ -57,7 +57,7 @@ const Login = () => {
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
           </div>
-          <h2 className="branding-title">HR Core Platform</h2>
+          <h2 className="branding-title">Employee_Hub</h2>
           <p className="branding-text">
             Unlock the power of predictive machine learning analytics. Manage daily attendance streams, predict performance trajectories, and automate corporate rewards seamlessly.
           </p>

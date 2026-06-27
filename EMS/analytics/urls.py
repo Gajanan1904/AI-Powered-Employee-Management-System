@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import get_activities
+from .views import attendance_trend
 
 urlpatterns = [
 
@@ -14,4 +16,8 @@ urlpatterns = [
     path('employee-insights/<int:id>/', views.employee_insights),
     
     path('ml-data/', views.ml_data),
+    
+    path('activities/', get_activities),
+    
+    path('attendance-trend/', attendance_trend),
 ]

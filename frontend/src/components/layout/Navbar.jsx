@@ -3,9 +3,11 @@ import { useLocation } from 'react-router-dom';
 import ThemeToggle from '../shared/ThemeToggle';
 import NotificationPanel from './NotificationPanel';
 import ProfileDropdown from './ProfileDropdown';
+import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
 
 const Navbar = ({ onMenuToggle }) => {
+  const { user } = useAuth();
   const location = useLocation();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -87,12 +89,14 @@ const Navbar = ({ onMenuToggle }) => {
             onClick={() => setShowProfile(!showProfile)}
             aria-label="Toggle user menu"
           >
-            <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120"
-              alt="Sarah Connor"
-              className="navbar-user-avatar"
-            />
-            <span className="navbar-username">Sarah C.</span>
+            <div className="navbar-user-avatar">
+              {user?.name ? user.name.trim().charAt(0).toUpperCase() : 'G'}
+            </div>
+            <span className="navbar-username">
+              {user?.name
+                ? `${user.name.split(' ')[0]} ${user.name.split(' ')[1] ? user.name.split(' ')[1][0] + '.' : ''}`
+                : "Gajanan B."}
+            </span>
             <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className={`profile-chevron ${showProfile ? 'rotate' : ''}`}>
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>

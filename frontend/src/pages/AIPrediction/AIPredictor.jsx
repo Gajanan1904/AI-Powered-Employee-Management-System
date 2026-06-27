@@ -66,7 +66,7 @@ const AIPredictor = () => {
         rewardPoints: 500
       });
     } else {
-      const emp = employees.find((x) => x.id === id);
+      const emp = employees.find((x) => x.id === parseInt(id));
       if (emp) {
         setFormData({
           employeeName: emp.name,
@@ -83,6 +83,29 @@ const AIPredictor = () => {
     }
   };
 
+  const validateForm = () => {
+
+  if (formData.attendance < 0 || formData.attendance > 100)
+    return "Attendance must be between 0 and 100";
+
+  if (formData.communication < 0 || formData.communication > 100)
+    return "Communication must be between 0 and 100";
+
+  if (formData.teamwork < 0 || formData.teamwork > 100)
+    return "Teamwork must be between 0 and 100";
+
+  if (formData.innovation < 0 || formData.innovation > 100)
+    return "Innovation must be between 0 and 100";
+
+  if (formData.taskCompletion < 0 || formData.taskCompletion > 100)
+    return "Task Completion must be between 0 and 100";
+
+  if (formData.rewardPoints < 0 || formData.rewardPoints > 1000)
+    return "Reward Points must be between 0 and 1000";
+
+  return null;
+};
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -90,6 +113,13 @@ const AIPredictor = () => {
 
   const handlePredict = async (e) => {
     e.preventDefault();
+
+    const validationError = validateForm();
+
+if (validationError) {
+  setErrorMsg(validationError);
+  return;
+}
     if (!formData.employeeName) {
       setErrorMsg('Please input a candidate name for AI profiling.');
       return;
@@ -113,6 +143,45 @@ const AIPredictor = () => {
   };
 
   const deptOptions = ['Engineering', 'Product', 'Marketing', 'Sales', 'HR', 'Finance'];
+
+  // Prediction Analytics
+
+const totalPredictions = history.length;
+
+const averageScore =
+  totalPredictions > 0
+    ? (
+        history.reduce((sum, item) => sum + Number(item.score), 0) /
+        totalPredictions
+      ).toFixed(1)
+    : 0;
+
+const topPredictedEmployee =
+  history.length > 0
+    ? history.reduce((max, item) =>
+        item.score > max.score ? item : max
+      )
+    : null;
+
+const highRiskCount = history.filter(
+  (item) => item.churnRisk >= 20
+).length;
+
+// Top Department
+
+const departmentCounts = {};
+
+history.forEach((item) => {
+  departmentCounts[item.department] =
+    (departmentCounts[item.department] || 0) + 1;
+});
+
+const topDepartment =
+  Object.keys(departmentCounts).length > 0
+    ? Object.keys(departmentCounts).reduce((a, b) =>
+        departmentCounts[a] > departmentCounts[b] ? a : b
+      )
+    : "N/A";
 
   if (loading) return <Loader text="Re-synchronizing local machine learning parameters..." />;
 
@@ -175,6 +244,8 @@ const AIPredictor = () => {
                 type="number"
                 min="0"
                 max="100"
+                step="any"
+                placeholder="0-100"
                 name="attendance"
                 value={formData.attendance}
                 onChange={handleInputChange}
@@ -184,6 +255,8 @@ const AIPredictor = () => {
                 label="Reward Points Balance"
                 type="number"
                 min="0"
+                max="1000"
+                placeholder="0-1000"
                 name="rewardPoints"
                 value={formData.rewardPoints}
                 onChange={handleInputChange}
@@ -197,6 +270,8 @@ const AIPredictor = () => {
                 type="number"
                 min="0"
                 max="100"
+                step="any"
+                placeholder="0-100"
                 name="teamwork"
                 value={formData.teamwork}
                 onChange={handleInputChange}
@@ -206,6 +281,8 @@ const AIPredictor = () => {
                 type="number"
                 min="0"
                 max="100"
+                step="any"
+                placeholder="0-100"
                 name="innovation"
                 value={formData.innovation}
                 onChange={handleInputChange}
@@ -218,6 +295,8 @@ const AIPredictor = () => {
                 type="number"
                 min="0"
                 max="100"
+                step="any"
+                placeholder="0-100"
                 name="communication"
                 value={formData.communication}
                 onChange={handleInputChange}
@@ -227,6 +306,8 @@ const AIPredictor = () => {
                 type="number"
                 min="0"
                 max="100"
+                step="any"
+                placeholder="0-100"
                 name="taskCompletion"
                 value={formData.taskCompletion}
                 onChange={handleInputChange}
@@ -318,6 +399,34 @@ const AIPredictor = () => {
           )}
         </div>
       </div>
+
+      <div className="ai-insights-grid">
+  
+  <div className="insight-card glass-card">
+    <h4>Top Predicted Employee</h4>
+    <strong>
+      {topPredictedEmployee
+        ? `${topPredictedEmployee.employeeName} - ${topPredictedEmployee.score}%`
+        : "N/A"}
+    </strong>
+  </div>
+
+  <div className="insight-card glass-card">
+    <h4>Average Prediction Score</h4>
+    <strong>{averageScore}%</strong>
+  </div>
+
+  <div className="insight-card glass-card">
+    <h4>High Risk Count</h4>
+    <strong>{highRiskCount} Employees</strong>
+  </div>
+
+  <div className="insight-card glass-card">
+    <h4>Top Department</h4>
+    <strong>{topDepartment}</strong>
+  </div>
+
+</div>
 
       {/* 4. Prediction History Auditing Logs list */}
       <div className="ai-predictions-history-logs glass-card animate-fade-in">

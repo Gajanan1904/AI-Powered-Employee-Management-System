@@ -4,6 +4,8 @@ import { apiService } from '../../services/apiService';
 import Loader from '../../components/common/Loader';
 import Button from '../../components/common/Button';
 import Alert from '../../components/common/Alert';
+import Pagination from '../../components/common/Pagination';
+import Avatar from '../../components/common/Avatar';
 import './AttendanceTracker.css';
 
 const AttendanceTracker = () => {
@@ -14,11 +16,16 @@ const AttendanceTracker = () => {
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
+  // Pagination state (5 items per page)
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   const loadAttendance = async () => {
     try {
-      const res = await apiService.getEmployees();
+      const res = await apiService.getAttendance();
       setEmployees(res.data);
     } catch (err) {
+      console.error(err);
       setErrorMsg('Failed to synchronize attendance logs.');
     } finally {
       setLoading(false);
@@ -31,10 +38,12 @@ const AttendanceTracker = () => {
 
   const handleStatusToggle = async (empId, newStatus) => {
     try {
+      console.log('Sending:', empId, newStatus);
       await apiService.toggleAttendance(empId, newStatus);
-      setSuccessMsg(`Attendance status updated for employee.`);
+      setSuccessMsg('Attendance status updated successfully.');
       loadAttendance();
     } catch (err) {
+      console.error(err);
       setErrorMsg('Failed to toggle status.');
     }
   };
@@ -45,8 +54,12 @@ const AttendanceTracker = () => {
   const total = employees.length;
   const present = employees.filter((e) => e.status === 'Present').length;
   const absent = employees.filter((e) => e.status === 'Absent').length;
-  const late = employees.filter((e) => e.status === 'Late').length;
+  const leave = employees.filter((e) => e.status === 'Leave').length;
   const rate = total > 0 ? Math.round((present / total) * 100) : 0;
+
+  // Pagination slicing
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedEmployees = employees.slice(startIndex, startIndex + itemsPerPage);
 
   // Render static mock calendar dates
   const daysInMonth = Array.from({ length: 30 }, (_, i) => i + 1);
@@ -86,7 +99,7 @@ const AttendanceTracker = () => {
         </div>
         <div className="stat-widget glass-card">
           <span className="widget-label">Late Logs</span>
-          <h3 className="widget-value text-orange">{late}</h3>
+          <h3 className="widget-value text-orange">{leave}</h3>
           <span className="widget-desc">Scans past 09:00 AM</span>
         </div>
       </div>
@@ -108,54 +121,75 @@ const AttendanceTracker = () => {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((emp) => (
-                  <tr key={emp.id}>
-                    <td>
-                      <div className="profile-cell-mini">
-                        <img src={emp.avatar} alt={emp.name} className="avatar-mini" />
-                        <div className="profile-cell-texts">
-                          <strong>{emp.name}</strong>
-                          <span>{emp.id} - {emp.department}</span>
+                {paginatedEmployees.map((emp) => {
+                  const empIdCode = emp.employee_id || emp.employee_code || emp.emp_id || (typeof emp.employee === 'string' ? emp.employee : null) || `EMP00${emp.id || 1}`;
+                  const deptName = emp.department || 'HR';
+                  return (
+                    <tr key={emp.id}>
+                      <td>
+                        <div className="profile-cell-mini">
+                          <Avatar src={emp.avatar} name={emp.name} className="avatar-mini" />
+                          <div className="profile-cell-texts">
+                            <span className="profile-name-bold">{emp.name}</span>
+                            <span className="profile-meta-sub">{empIdCode} • {deptName}</span>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <strong>{emp.attendanceRate}%</strong>
-                    </td>
-                    <td>
-                      <span className={`badge badge-${emp.status === 'Present' ? 'success' : emp.status === 'Absent' ? 'danger' : 'warning'}`}>
-                        {emp.status}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="manual-toggle-btn-grp">
-                        <button
-                          className={`manual-tog-btn active-green ${emp.status === 'Present' ? 'active' : ''}`}
-                          onClick={() => handleStatusToggle(emp.id, 'Present')}
-                          title="Mark Present"
-                        >
-                          P
-                        </button>
-                        <button
-                          className={`manual-tog-btn active-orange ${emp.status === 'Late' ? 'active' : ''}`}
-                          onClick={() => handleStatusToggle(emp.id, 'Late')}
-                          title="Mark Late"
-                        >
-                          L
-                        </button>
-                        <button
-                          className={`manual-tog-btn active-red ${emp.status === 'Absent' ? 'active' : ''}`}
-                          onClick={() => handleStatusToggle(emp.id, 'Absent')}
-                          title="Mark Absent"
-                        >
-                          A
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      <td>
+                        <strong>{emp.attendanceRate}%</strong>
+                      </td>
+                      <td>
+                        <span className={`badge badge-${emp.status === 'Present' ? 'success' : emp.status === 'Absent' ? 'danger' : 'warning'}`}>
+                          {emp.status}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="manual-toggle-btn-grp">
+                          <button
+                            className={`manual-tog-btn active-green ${
+                              emp.status === 'Present' ? 'active' : ''
+                            }`}
+                            onClick={() => handleStatusToggle(emp.employee || emp.id, 'Present')}
+                            title="Mark Present"
+                          >
+                            P
+                          </button>
+
+                          <button
+                            className={`manual-tog-btn active-orange ${
+                              emp.status === 'Leave' ? 'active' : ''
+                            }`}
+                            onClick={() => handleStatusToggle(emp.employee || emp.id, 'Leave')}
+                            title="Mark Leave"
+                          >
+                            L
+                          </button>
+
+                          <button
+                            className={`manual-tog-btn active-red ${
+                              emp.status === 'Absent' ? 'active' : ''
+                            }`}
+                            onClick={() => handleStatusToggle(emp.employee || emp.id, 'Absent')}
+                            title="Mark Absent"
+                          >
+                            A
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
+          </div>
+
+          <div className="attendance-pagination-box">
+            <Pagination
+              currentPage={currentPage}
+              totalItems={employees.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
           </div>
         </div>
 
@@ -166,10 +200,9 @@ const AttendanceTracker = () => {
 
           <div className="calendar-grid">
             {daysInMonth.map((day) => {
-              // Simulate random visual streaks (mostly present, some late/absent)
               let dayState = 'present';
               if (day === 7 || day === 14 || day === 21 || day === 28) dayState = 'weekend';
-              else if (day === 4 || day === 18) dayState = 'late';
+              else if (day === 4 || day === 18) dayState = 'leave';
               else if (day === 11) dayState = 'absent';
 
               return (

@@ -3,10 +3,11 @@ from employee.models import Employee
 
 class Attendance(models.Model):
     STATUS_CHOICES = (
-        ('Present', 'Present'),
-        ('Absent', 'Absent'),
-        ('Leave', 'Leave'),
-    )
+    ('Present', 'Present'),
+    ('Absent', 'Absent'),
+    ('Late', 'Late'),
+    ('Leave', 'Leave'),
+)
 
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     date = models.DateField()

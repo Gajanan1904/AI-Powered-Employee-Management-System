@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000, // 10 seconds timeout
+  timeout: 30000, // 30 seconds timeout
 });
 
 // Request interceptor to automatically attach JWT token if it exists in local storage
@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
     if (token) {
-      config.headers['Authorization'] = `JWT ${token}`;
+      config.headers['Authorization'] = `Token ${token}`;
     }
     return config;
   },

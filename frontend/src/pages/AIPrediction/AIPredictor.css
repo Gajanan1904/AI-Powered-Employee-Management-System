@@ -228,3 +228,27 @@
     grid-template-columns: 1fr;
   }
 }
+
+.ai-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.insight-card {
+  padding: 18px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.insight-card h4 {
+  margin-bottom: 10px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.insight-card strong {
+  font-size: 20px;
+  color: var(--color-primary);
+}

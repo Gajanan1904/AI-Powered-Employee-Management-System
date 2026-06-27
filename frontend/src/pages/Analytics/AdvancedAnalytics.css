@@ -1,38 +1,109 @@
+/* Executive Analytics Dashboard Polish */
 .advanced-analytics-root {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .analytics-metrics-overview-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  gap: 16px;
 }
 
 .analytics-widget {
-  padding: 24px !important;
-  text-align: center;
+  padding: 16px 20px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.analytics-widget:hover {
+  transform: translateY(-2px);
 }
 
+.widget-header-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.widget-icon-emoji {
+  font-size: 1.2rem;
+}
+
+.analytics-widget .widget-label {
+  font-family: var(--font-header);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.analytics-widget .widget-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 4px 0 6px 0;
+  line-height: 1;
+}
+
+.analytics-widget .widget-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.analytics-widget .widget-desc strong {
+  color: var(--text-primary);
+}
+
+/* Card glows for summary widgets */
+.glow-gold-card {
+  border-color: rgba(251, 191, 36, 0.25) !important;
+}
+.glow-gold-card:hover {
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.15) !important;
+}
+
+.glow-red-card {
+  border-color: rgba(244, 63, 94, 0.25) !important;
+}
+.glow-red-card:hover {
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.15) !important;
+}
+
+.glow-cyan-card {
+  border-color: rgba(6, 182, 212, 0.25) !important;
+}
+.glow-cyan-card:hover {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.15) !important;
+}
+
+.text-gold {
+  color: #fbbf24;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.3);
+}
+
+/* Roster split grid */
 .analytics-split-grid {
   display: grid;
-  grid-template-columns: 7.2fr 4.8fr;
-  gap: 24px;
+  grid-template-columns: 6.8fr 5.2fr;
+  gap: 16px;
+  align-items: start;
 }
 
 .analytics-leaderboard-panel, .analytics-intervention-panel {
-  padding: 28px !important;
+  padding: 20px !important;
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
 
 .analytics-block-title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
+  padding-bottom: 8px;
   text-align: left;
 }
 
@@ -41,82 +112,161 @@
   color: var(--color-danger);
 }
 
+/* Table container fitting content snug without whitespace */
+.analytics-leaderboard-panel .table-responsive-container {
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  position: relative;
+  transition: max-height var(--transition-normal);
+}
+
+.analytics-leaderboard-panel .custom-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.analytics-leaderboard-panel .custom-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--bg-card);
+  border-bottom: 2px solid var(--border-color);
+  padding: 12px 16px;
+}
+
+.analytics-leaderboard-panel .custom-table td {
+  padding: 10px 16px;
+  vertical-align: middle;
+}
+
+.profile-cell-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.avatar-mini {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-color);
+  font-size: 0.95rem;
+}
+
+.profile-cell-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.profile-name-bold {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.clickable-name {
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+.clickable-name:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.profile-meta-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .rank-tag {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   padding: 2px 6px;
   border-radius: var(--radius-xs);
 }
+.rank-1 { background-color: rgba(251, 191, 36, 0.1); color: #d97706; }
+.rank-2 { background-color: rgba(148, 163, 184, 0.1); color: #475569; }
+.rank-3 { background-color: rgba(180, 83, 9, 0.1); color: #b45309; }
 
 .standings-badges-count {
   font-weight: 600;
+  font-size: 0.8rem;
   color: var(--color-secondary);
 }
 
-/* Intervention lists */
+/* Compact coaching section showing cards cleanly without whitespace */
 .intervention-meta-desc {
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   text-align: left;
 }
 
 .intervention-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 4px;
+  transition: max-height var(--transition-normal);
 }
 
 .intervention-item-card {
   background-color: var(--bg-input);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
   text-align: left;
 }
 
 .glow-danger {
   border-color: rgba(244, 63, 94, 0.2) !important;
 }
-.dark-theme .glow-danger {
-  box-shadow: 0 0 10px rgba(244, 63, 94, 0.05) !important;
-}
 
 .item-profile-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .intervention-avatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   object-fit: cover;
   border: 1.5px solid var(--color-danger);
+  font-size: 0.9rem;
 }
 
 .item-profile-texts h4 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 .item-profile-texts span {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .intervention-meta-details {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   border-top: 1px dashed var(--border-color);
   border-bottom: 1px dashed var(--border-color);
-  padding: 8px 0;
+  padding: 4px 0;
 }
 
 .meta-box {
@@ -125,49 +275,87 @@
   flex-direction: column;
 }
 .meta-box span {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   font-family: var(--font-header);
 }
 .meta-box strong {
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
 .intervention-coaching-box {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 10px 12px;
+  padding: 6px 10px;
   border-radius: var(--radius-sm);
 }
 .intervention-coaching-box span {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--color-danger);
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 .intervention-coaching-box p {
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--text-secondary);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .intervention-empty-state {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 30px;
   color: var(--text-muted);
   font-family: var(--font-header);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
+/* Card action footers placed neatly right below content */
+.analytics-card-footer {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.analytics-action-link-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  outline: none;
+}
+.analytics-action-link-btn:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+.text-red-link {
+  color: var(--color-danger) !important;
+}
+.text-red-link:hover {
+  opacity: 0.8;
+}
+
+/* Requirement 3: Department Performance Chart (~280-300px total height, no text overlap) */
 .analytics-dept-charts-row {
-  padding: 28px !important;
+  padding: 20px !important;
+}
+
+.chart-view-viewport {
+  width: 100%;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
 }
 
 @media (max-width: 1024px) {

@@ -9,7 +9,7 @@ const UserProfile = () => {
   const { user } = useAuth();
 
   const [formData, setFormData] = useState({
-    name: user?.name || 'Sarah Connor',
+    name: user?.name || 'Gajanan Bidwai',
     email: user?.email || 'admin@enterprise.com',
     role: user?.role || 'Chief HR Officer',
     bio: 'Overseeing corporate talent acquisition, biometric integrations, and AI analytics metrics for Enterprise HR Core.',
@@ -45,7 +45,9 @@ const UserProfile = () => {
         {/* Left Side: Avatar Card */}
         <div className="profile-side-avatar-card glass-card">
           <div className="avatar-card-top">
-            <img src={user?.avatar} alt={formData.name} className="user-master-profile-avatar" />
+            <div className="user-master-profile-avatar">
+              {formData.name ? formData.name.trim().charAt(0).toUpperCase() : 'G'}
+            </div>
             <span className="profile-badge-active">ACTIVE CHRO</span>
             <h3>{formData.name}</h3>
             <p className="profile-card-role">{formData.role}</p>

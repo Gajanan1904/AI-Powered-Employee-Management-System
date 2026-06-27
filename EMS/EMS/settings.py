@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'analytics',
     'ai_prediction',
     'drf_yasg',
+    'face_auth',
 ]
 
 MIDDLEWARE = [

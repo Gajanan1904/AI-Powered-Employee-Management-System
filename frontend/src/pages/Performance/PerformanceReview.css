@@ -8,9 +8,20 @@
   display: grid;
   grid-template-columns: 5.2fr 6.8fr;
   gap: 24px;
+  align-items: start;
 }
 
-.performance-evaluation-form-panel, .performance-roster-list-panel {
+/* Requirement 1: Keep left KPI Evaluation panel fixed */
+.performance-evaluation-form-panel {
+  padding: 28px !important;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 90px;
+  z-index: 20;
+}
+
+.performance-roster-list-panel {
   padding: 28px !important;
   display: flex;
   flex-direction: column;
@@ -109,17 +120,70 @@
 .range-purple { color: #a855f7; }
 .range-rose { color: #e11d48; }
 
-/* Table highlighting and clicks */
+/* Requirement 2 & 3: Make table independently scrollable with max-height ~600px */
+.performance-roster-list-panel .table-responsive-container {
+  max-height: 600px;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+/* Requirement 4: Keep table header fixed while scrolling */
+.performance-roster-list-panel .custom-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.performance-roster-list-panel .custom-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--bg-card);
+  border-bottom: 2px solid var(--border-color);
+}
+
+/* Mini profile cell styling */
+.profile-cell-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.avatar-mini {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-color);
+  font-size: 1rem;
+}
+
+.profile-cell-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
 .clickable-name {
   font-family: var(--font-header);
   font-weight: 700;
+  font-size: 0.95rem;
   color: var(--text-primary);
   cursor: pointer;
   transition: color var(--transition-fast);
+  line-height: 1.2;
 }
 .clickable-name:hover {
   color: var(--color-primary);
   text-decoration: underline;
+}
+
+.profile-meta-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .highlighted-row {
@@ -132,5 +196,8 @@
 @media (max-width: 1024px) {
   .performance-split-grid {
     grid-template-columns: 1fr;
+  }
+  .performance-evaluation-form-panel {
+    position: static;
   }
 }

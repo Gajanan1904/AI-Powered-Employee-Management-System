@@ -6,7 +6,7 @@ from .serializers import PerformanceSerializer
 
 @api_view(['GET'])
 def get_performance(request):
-    performance = Performance.objects.all()
+    performance = Performance.objects.select_related('employee')
     serializer = PerformanceSerializer(performance, many=True)
     return Response(serializer.data)
 

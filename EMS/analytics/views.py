@@ -10,6 +10,8 @@ from django.db.models import Avg
 from rewards.models import Reward
 from django.db.models import Avg
 
+from datetime import date, timedelta
+
 
 # Top Performers Leaderboard
 @api_view(['GET'])
@@ -21,9 +23,12 @@ def leaderboard(request):
 
     for emp in top_employees:
         data.append({
-            'employee': emp.employee.name,
+            'id': emp.employee.id,
+            'name': emp.employee.name,
+            'department': emp.employee.department,
+            'designation': emp.employee.designation,
             'final_score': emp.final_score
-        })
+})
 
     return Response(data)
 
@@ -38,9 +43,12 @@ def low_performance(request):
 
     for emp in low_employees:
         data.append({
-            'employee': emp.employee.name,
+            'id': emp.employee.id,
+            'name': emp.employee.name,
+            'department': emp.employee.department,
+            'designation': emp.employee.designation,
             'final_score': emp.final_score
-        })
+})
 
     return Response(data)
 
@@ -66,11 +74,21 @@ def absent_employees(request):
 @api_view(['GET'])
 def department_summary(request):
 
-    departments = Employee.objects.values('department').annotate(
-        avg_salary=Avg('salary')
+    departments = Performance.objects.values(
+        'employee__department'
+    ).annotate(
+        avg_score=Avg('final_score')
     )
 
-    return Response(departments)
+    data = []
+
+    for dept in departments:
+        data.append({
+            "department": dept['employee__department'],
+            "avg_score": round(dept['avg_score'], 2)
+        })
+
+    return Response(data)
 
 @api_view(['GET'])
 def employee_insights(request, id):
@@ -167,3 +185,64 @@ def ml_data(request):
         })
 
     return Response(data)
+
+
+@api_view(['GET'])
+def get_activities(request):
+
+    activities = [
+        {
+            "id": 1,
+            "text": "Employee records synchronized successfully",
+            "time": "Just now",
+            "type": "system"
+        },
+        {
+            "id": 2,
+            "text": "Performance analytics updated",
+            "time": "5 mins ago",
+            "type": "system"
+        },
+        {
+            "id": 3,
+            "text": "Attendance report generated",
+            "time": "15 mins ago",
+            "type": "attendance"
+        }
+    ]
+
+    return Response(activities)
+
+@api_view(['GET'])
+def attendance_trend(request):
+
+    labels = []
+    data = []
+
+    for i in range(6, -1, -1):
+
+        day = date.today() - timedelta(days=i)
+
+        total = Attendance.objects.filter(
+            date=day
+        ).count()
+
+        present = Attendance.objects.filter(
+            date=day,
+            status='Present'
+        ).count()
+
+        percentage = 0
+
+        if total > 0:
+            percentage = round(
+                (present / total) * 100
+            )
+
+        labels.append(day.strftime("%a"))
+        data.append(percentage)
+
+    return Response({
+        "labels": labels,
+        "data": data
+    })

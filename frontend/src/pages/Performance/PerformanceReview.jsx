@@ -4,6 +4,7 @@ import Loader from '../../components/common/Loader';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Alert from '../../components/common/Alert';
+import Avatar from '../../components/common/Avatar';
 import { DonutChart } from '../../components/shared/Charts';
 import './PerformanceReview.css';
 
@@ -19,22 +20,21 @@ const PerformanceReview = () => {
     teamwork: 80,
     communication: 80,
     innovation: 80,
-    taskCompletion: 80
+    task_completion: 80
   });
   const [submitLoading, setSubmitLoading] = useState(false);
 
   const loadData = async () => {
     try {
-      const res = await apiService.getEmployees();
+      const res = await apiService.getPerformance();
       setEmployees(res.data);
       if (res.data.length > 0 && !selectedEmpId) {
         setSelectedEmpId(res.data[0].id);
-        // Load initial scores
         setScores({
-          teamwork: res.data[0].teamwork,
-          communication: res.data[0].communication,
-          innovation: res.data[0].innovation,
-          taskCompletion: res.data[0].taskCompletion
+          teamwork: res.data[0].teamwork || 0,
+          communication: res.data[0].communication || 0,
+          innovation: res.data[0].innovation || 0,
+          task_completion: res.data[0].task_completion || 0
         });
       }
     } catch (err) {
@@ -52,13 +52,14 @@ const PerformanceReview = () => {
   const handleEmployeeSelect = (e) => {
     const id = e.target.value;
     setSelectedEmpId(id);
-    const emp = employees.find((x) => x.id === id);
+    const emp = employees.find((x) => String(x.id) === String(id));
     if (emp) {
+      console.log(JSON.stringify(emp, null, 2));
       setScores({
         teamwork: emp.teamwork,
         communication: emp.communication,
         innovation: emp.innovation,
-        taskCompletion: emp.taskCompletion
+        task_completion: emp.task_completion
       });
     }
   };
@@ -70,7 +71,7 @@ const PerformanceReview = () => {
 
   // Compute live average
   const liveAverage = Math.round(
-    (scores.teamwork + scores.communication + scores.innovation + scores.taskCompletion) / 4
+    (Number(scores.teamwork || 0) + Number(scores.communication || 0) + Number(scores.innovation || 0) + Number(scores.task_completion || 0)) / 4
   );
 
   const handleEvaluationSubmit = async (e) => {
@@ -79,7 +80,8 @@ const PerformanceReview = () => {
     setErrorMsg('');
     setSuccessMsg('');
 
-    const targetEmp = employees.find((emp) => emp.id === selectedEmpId);
+    const targetEmp = employees.find((x) => String(x.id) === String(selectedEmpId));
+
     if (!targetEmp) {
       setErrorMsg('No employee selected.');
       setSubmitLoading(false);
@@ -87,16 +89,14 @@ const PerformanceReview = () => {
     }
 
     try {
-      // Simulate API submit to update employee scores
       await apiService.updateEmployee(selectedEmpId, scores);
       
-      // Dynamic rewards check: award reward points if rating is high
       if (liveAverage >= 90) {
         await apiService.addRewardPoints(selectedEmpId, 250, 'Outstanding KPI review (>=90 rating)');
-        setSuccessMsg(`Evaluation compiled for ${targetEmp.name}! Rating is ${liveAverage}%. Added 250 Reward Points!`);
+        setSuccessMsg(`Evaluation compiled for ${targetEmp.employee_name || targetEmp.name}! Rating is ${liveAverage}%. Added 250 Reward Points!`);
       } else {
         await apiService.addRewardPoints(selectedEmpId, 50, 'KPI review compiled');
-        setSuccessMsg(`Evaluation compiled for ${targetEmp.name}! Overall rating: ${liveAverage}%.`);
+        setSuccessMsg(`Evaluation compiled for ${targetEmp.employee_name || targetEmp.name}! Overall rating: ${liveAverage}%.`);
       }
 
       loadData();
@@ -126,7 +126,7 @@ const PerformanceReview = () => {
               <select value={selectedEmpId} onChange={handleEmployeeSelect} className="form-input">
                 {employees.map((emp) => (
                   <option key={emp.id} value={emp.id}>
-                    {emp.name} ({emp.id})
+                    {emp.employee_name || emp.name} ({emp.employee_code || emp.employee_id || (typeof emp.employee === 'string' && emp.employee.startsWith('EMP') ? emp.employee : `EMP00${emp.id}`)})
                   </option>
                 ))}
               </select>
@@ -199,15 +199,15 @@ const PerformanceReview = () => {
               <div className="slider-item-row">
                 <div className="slider-meta">
                   <span className="slider-name">Task Execution Precision</span>
-                  <span className="slider-current-val">{scores.taskCompletion}%</span>
+                  <span className="slider-current-val">{scores.task_completion}%</span>
                 </div>
                 <input
                   type="range"
-                  name="taskCompletion"
+                  name="task_completion"
                   min="0"
                   max="100"
                   className="kpi-slider-input range-rose"
-                  value={scores.taskCompletion}
+                  value={scores.task_completion}
                   onChange={handleSliderChange}
                 />
               </div>
@@ -234,28 +234,36 @@ const PerformanceReview = () => {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((emp) => (
-                  <tr key={emp.id} className={selectedEmpId === emp.id ? 'highlighted-row' : ''}>
-                    <td>
-                      <div className="profile-cell-mini">
-                        <img src={emp.avatar} alt={emp.name} className="avatar-mini" />
-                        <div className="profile-cell-texts">
-                          <strong className="clickable-name" onClick={() => handleEmployeeSelect({ target: { value: emp.id } })}>
-                            {emp.name}
-                          </strong>
-                          <span>{emp.id}</span>
+                {employees.map((emp) => {
+                  const empName = emp.employee_name || emp.name;
+                  const empCode = emp.employee_code || emp.employee_id || (typeof emp.employee === 'string' && emp.employee.startsWith('EMP') ? emp.employee : `EMP00${emp.id}`);
+                  return (
+                    <tr key={emp.id} className={String(selectedEmpId) === String(emp.id) ? 'highlighted-row' : ''}>
+                      <td>
+                        <div className="profile-cell-mini">
+                          <Avatar src={emp.avatar} name={empName} className="avatar-mini" />
+                          <div className="profile-cell-texts">
+                            <strong
+                              className="clickable-name"
+                              onClick={() => setSelectedEmpId(emp.id)}
+                            >
+                              {empName}
+                            </strong>
+                            <span className="profile-meta-sub">{empCode}</span>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td>{emp.department}</td>
-                    <td>{emp.designation}</td>
-                    <td>
-                      <span className={`badge badge-${emp.performanceScore >= 90 ? 'success' : emp.performanceScore >= 80 ? 'warning' : 'danger'}`}>
-                        {emp.performanceScore}% rating
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      
+                      <td>{emp.department}</td>
+                      <td>{emp.designation}</td>
+                      <td>
+                        <span className={`badge badge-${emp.final_score >= 90 ? 'success' : emp.final_score >= 80 ? 'warning' : 'danger'}`}>
+                          {emp.final_score}% rating
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

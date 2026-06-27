@@ -1,21 +1,23 @@
 .dashboard-root-view {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
-/* Welcome Banner */
+/* 1. Welcome Banner */
 .dashboard-welcome-banner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px !important;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(6, 182, 212, 0.05));
-  border: 1px solid var(--border-color);
+  padding: 24px 32px !important;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(168, 85, 247, 0.06) 50%, rgba(6, 182, 212, 0.06) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  position: relative;
+  overflow: hidden;
 }
 
 .banner-texts h2 {
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 800;
   margin-bottom: 6px;
 }
@@ -23,9 +25,26 @@
   font-family: var(--font-body);
   font-size: 0.95rem;
   color: var(--text-secondary);
+  margin: 0;
+}
+.banner-texts strong {
+  color: var(--color-primary);
 }
 
-.banner-visual-pulse {
+.banner-visual-pulse-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.banner-mascot-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float-mascot 3s infinite ease-in-out;
+}
+
+.banner-sync-pill {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -37,41 +56,47 @@
   font-weight: 700;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
+  box-shadow: var(--shadow-sm);
 }
 
-.pulse-dot {
+.sparkle-icon {
+  font-size: 0.95rem;
+}
+
+.status-dot-green {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--color-primary);
-  box-shadow: 0 0 8px var(--color-primary);
-  animation: marker-pulse 1.2s infinite ease-in-out;
+  background-color: var(--color-success);
+  box-shadow: 0 0 8px var(--color-success);
 }
 
-/* Summary Grid */
+/* 2. Summary Cards Grid (5 across) */
 .dashboard-summary-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
 }
 
 .summary-card {
   display: flex;
   flex-direction: column;
-  padding: 20px !important;
+  padding: 18px 20px !important;
+  position: relative;
+  overflow: hidden;
 }
 
 .card-top-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .card-lbl {
   font-family: var(--font-header);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
 }
 
@@ -82,76 +107,119 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
-.bg-indigo { background-color: rgba(99, 102, 241, 0.08); }
-.bg-emerald { background-color: rgba(16, 185, 129, 0.08); }
-.bg-rose { background-color: rgba(244, 63, 94, 0.08); }
-.bg-yellow { background-color: rgba(245, 158, 11, 0.08); }
-.bg-cyan { background-color: rgba(6, 182, 212, 0.08); }
+.bg-indigo { background-color: rgba(99, 102, 241, 0.1); }
+.bg-emerald { background-color: rgba(16, 185, 129, 0.1); }
+.bg-rose { background-color: rgba(244, 63, 94, 0.1); }
+.bg-orange { background-color: rgba(245, 158, 11, 0.1); }
+.bg-pink { background-color: rgba(236, 72, 153, 0.1); }
 
 .card-stat-number {
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 800;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  line-height: 1;
 }
 
 .card-micro-status {
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
-}
-.card-micro-status strong {
-  color: var(--text-primary);
+  margin-bottom: 12px;
+  z-index: 2;
 }
 
-.green-text span { color: var(--color-success); font-weight: 700; }
+.green-text span, .green-text strong { color: var(--color-success); font-weight: 700; }
 .red-text strong { color: var(--color-danger); }
 .orange-text { color: var(--color-warning); font-weight: 600; }
 
-.card-glow-warning {
-  border-color: rgba(6, 182, 212, 0.2) !important;
-}
-.dark-theme .card-glow-warning {
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.1) !important;
+.card-glow-pink {
+  border-color: rgba(236, 72, 153, 0.2) !important;
 }
 
-/* Layout Grid */
+.card-sparkline-box {
+  margin-top: auto;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-bottom: -18px;
+  opacity: 0.85;
+}
+
+/* 3. Main Layout Grid */
 .dashboard-layout-grid {
   display: grid;
-  grid-template-columns: 8fr 4fr;
-  gap: 24px;
+  grid-template-columns: 7.5fr 4.5fr;
+  gap: 20px;
+  align-items: start;
 }
 
-.grid-left-side {
+.chart-wrapper-card, .activities-ticker-card, .coaching-priorities-card, .dept-index-card {
+  padding: 24px !important;
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
-.chart-wrapper-card {
-  padding: 24px !important;
+.card-header-with-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
 }
 
 .chart-card-title {
   font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
-/* Activities side panel */
-.activities-ticker-card {
-  padding: 24px !important;
+.card-filter-select {
+  font-family: var(--font-header);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+/* Attendance streak footer pills */
+.attendance-streak-foot-pills {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.streak-pill {
+  font-family: var(--font-header);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+}
+.pill-green { background-color: var(--color-success-bg); color: var(--color-success); border-color: var(--color-success-border); }
+.pill-red { background-color: var(--color-danger-bg); color: var(--color-danger); border-color: var(--color-danger-border); }
+.pill-blue { background-color: var(--color-primary-glow); color: var(--color-primary); border-color: rgba(99, 102, 241, 0.2); }
+
+/* Recent Activities card */
+.activities-ticker-card {
+  height: fit-content;
+  justify-content: flex-start;
 }
 
 .ticker-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 12px;
 }
@@ -171,7 +239,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  flex: 1;
+  margin-bottom: 16px;
 }
 
 .ticker-item {
@@ -181,46 +249,226 @@
   text-align: left;
 }
 
-.ticker-icon-bullet {
-  width: 10px;
-  height: 10px;
+.ticker-icon-circle {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
   flex-shrink: 0;
 }
-.bullet-attendance { background-color: var(--color-success); box-shadow: 0 0 4px var(--color-success); }
-.bullet-reward { background-color: var(--color-warning); box-shadow: 0 0 4px var(--color-warning); }
-.bullet-performance { background-color: #8b5cf6; box-shadow: 0 0 4px #8b5cf6; }
-.bullet-ai { background-color: var(--color-secondary); box-shadow: 0 0 4px var(--color-secondary); }
-.bullet-system { background-color: #3b82f6; box-shadow: 0 0 4px #3b82f6; }
+.bg-bullet-attendance { background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.bg-bullet-performance { background-color: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
+.bg-bullet-system { background-color: rgba(16, 185, 129, 0.15); color: #10b981; }
 
 .ticker-body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1;
 }
 
-.ticker-text {
-  font-size: 0.85rem;
+.ticker-title-time-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticker-title {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.88rem;
   color: var(--text-primary);
-  line-height: 1.4;
-  margin: 0;
 }
 
-.ticker-time {
-  font-size: 0.72rem;
+.ticker-desc {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
   color: var(--text-muted);
 }
 
-@media (max-width: 1024px) {
-  .dashboard-layout-grid {
+.ticker-time {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.card-footer-action-row {
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.view-all-link-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  outline: none;
+}
+.view-all-link-btn:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+.text-red-link { color: var(--color-danger) !important; }
+.text-red-link:hover { opacity: 0.8; }
+
+/* 4. Critical Coaching Priorities (Top 3 mini cards) */
+.coaching-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.coaching-mini-card {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  transition: border-color var(--transition-fast);
+}
+.coaching-mini-card:hover {
+  border-color: rgba(244, 63, 94, 0.3);
+}
+
+.coaching-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.coaching-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--color-danger);
+  font-size: 1rem;
+}
+
+.coaching-user-texts {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.coaching-user-name {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.coaching-user-role {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge-risk-pill {
+  font-family: var(--font-header);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger-border);
+  flex-shrink: 0;
+}
+
+.coaching-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px dashed var(--border-color);
+  border-bottom: 1px dashed var(--border-color);
+  padding: 8px 0;
+}
+
+.coaching-rating-col {
+  display: flex;
+  flex-direction: column;
+}
+.meta-lbl {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-header);
+}
+.rating-val-red {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-danger);
+}
+
+.trend-val-red {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-danger);
+}
+
+.coaching-action-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  outline: none;
+}
+.coaching-action-btn:hover {
+  background-color: var(--color-primary-glow);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+@keyframes float-mascot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (max-width: 1200px) {
+  .dashboard-summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .coaching-cards-row {
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 768px) {
-  .dashboard-welcome-banner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+@media (max-width: 900px) {
+  .dashboard-layout-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .dashboard-summary-cards {
+    grid-template-columns: 1fr;
   }
 }

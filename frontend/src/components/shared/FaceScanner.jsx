@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from '../common/Button';
 import './FaceScanner.css';
 import { apiService } from '../../services/apiService';
@@ -8,6 +8,11 @@ const FaceScanner = ({ onScanComplete }) => {
   const [employees, setEmployees] = useState([]);
   const [matchedEmp, setMatchedEmp] = useState(null);
   const [logStatus, setLogStatus] = useState('Marking attendance...');
+  const [isVerifying, setIsVerifying] = useState(false);
+
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const streamRef = useRef(null);
 
   useEffect(() => {
     // Load employees so we can randomly match one
@@ -16,21 +21,104 @@ const FaceScanner = ({ onScanComplete }) => {
     });
   }, []);
 
-  const handleGrantPermission = () => {
-    setStage('scanning');
-    
-    // Simulate face scanner processing
+  useEffect(() => {
+
+  if (
+    stage === "scanning" &&
+    videoRef.current &&
+    streamRef.current
+  ) {
+
+    videoRef.current.srcObject =
+      streamRef.current;
+
+    videoRef.current.play();
+
+    console.log("STREAM REATTACHED");
+
+  }
+
+}, [stage]);
+
+  const handleGrantPermission = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: true
+    });
+
+    streamRef.current = stream;
+
+    console.log("STREAM =", stream);
+
+    setStage("scanning");
+
     setTimeout(() => {
-      // Pick a random employee who is currently marked as Absent to mark them Present
-      const absentEmployees = employees.filter((e) => e.status === 'Absent');
-      const candidate = absentEmployees.length > 0 
-        ? absentEmployees[Math.floor(Math.random() * absentEmployees.length)] 
-        : employees[Math.floor(Math.random() * employees.length)];
-      
-      setMatchedEmp(candidate);
-      setStage('detected');
-    }, 3500);
-  };
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+
+        videoRef.current.play();
+
+        console.log(
+          "VIDEO ELEMENT =",
+          videoRef.current
+        );
+      }
+    }, 500);
+
+  } catch (err) {
+    console.error(err);
+    alert("Camera Permission Denied");
+  }
+};
+
+  const captureFace = async () => {
+
+  try {
+
+    const response = await fetch(
+      "http://127.0.0.1:8000/face-auth/verify/"
+    );
+
+    const data = await response.json();
+
+    console.log("FACE RESULT =", data);
+
+    alert(data.employee);
+
+  } catch (err) {
+
+    console.error(err);
+
+  }
+
+};
+
+const restartCamera = () => {
+
+  setMatchedEmp(null);
+
+  setStage("scanning");
+
+  setTimeout(() => {
+
+    if (
+      videoRef.current &&
+      streamRef.current
+    ) {
+
+      videoRef.current.srcObject =
+        streamRef.current;
+
+      videoRef.current.play();
+
+      console.log("CAMERA RESTARTED");
+
+    }
+
+  }, 300);
+
+};
+
 
   const handleConfirmMatch = async () => {
     if (!matchedEmp) return;
@@ -44,6 +132,110 @@ const FaceScanner = ({ onScanComplete }) => {
       console.error(err);
     }
   };
+
+ const captureAndVerify = async () => {
+
+  try {
+
+    setIsVerifying(true);
+
+    console.log("BUTTON CLICKED");
+
+    const canvas = canvasRef.current;
+    const video = videoRef.current;
+
+    console.log("CANVAS =", canvas);
+    console.log("VIDEO =", video);
+
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    console.log("SIZE =", canvas.width, canvas.height);
+
+    if (!video.videoWidth) {
+
+      setIsVerifying(false);
+
+      alert("Camera still loading. Please wait 2 seconds.");
+
+      return;
+    }
+
+    ctx.drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    console.log("IMAGE DRAWN");
+
+    const image = canvas.toDataURL("image/jpeg");
+
+    const response = await fetch(
+      "http://127.0.0.1:8000/face-auth/verify/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          image: image
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    console.log(result);
+
+    if (result.matched) {
+
+      console.log("EMPLOYEES =", employees);
+      console.log("FIRST EMPLOYEE =", employees[0]);
+      console.log("MATCHED NAME =", result.employee);
+
+      const employee = employees.find(
+        emp =>
+          emp.name &&
+          emp.name.toLowerCase().trim() ===
+          result.employee.toLowerCase().trim()
+      );
+
+      if (employee) {
+
+        setMatchedEmp(employee);
+        setIsVerifying(false);
+        setStage("detected");
+
+      } else {
+
+        setIsVerifying(false);
+        alert("Employee not found in HR database");
+
+      }
+
+    } else {
+
+      setIsVerifying(false);
+      alert("Face Not Matched");
+
+    }
+
+  } catch (err) {
+
+    console.error("VERIFY ERROR =", err);
+
+    setIsVerifying(false);
+
+    alert("Verification Failed");
+
+  }
+
+};
 
   return (
     <div className="face-scanner-wrapper glass-card glow-primary">
@@ -68,6 +260,20 @@ const FaceScanner = ({ onScanComplete }) => {
       {stage === 'scanning' && (
         <div className="scanning-state">
           <div className="video-viewport">
+
+            <video
+  ref={videoRef}
+  autoPlay
+  playsInline
+  muted
+  width="400"
+  height="300"
+/>
+<canvas
+  ref={canvasRef}
+  style={{ display: "none" }}
+/>
+
             <div className="cyber-corner top-left"></div>
             <div className="cyber-corner top-right"></div>
             <div className="cyber-corner bottom-left"></div>
@@ -76,13 +282,13 @@ const FaceScanner = ({ onScanComplete }) => {
             {/* Animated Laser sweep */}
             <div className="scanning-laser"></div>
             
-            {/* Cyber Face Outline overlay */}
+            {/* Cyber Face Outline overlay
             <svg className="face-outline" viewBox="0 0 100 100">
               <path d="M50 15 C30 15, 25 35, 25 50 C25 70, 35 85, 50 85 C65 85, 75 70, 75 50 C75 35, 70 15, 50 15 Z" fill="none" stroke="var(--color-secondary)" strokeWidth="1" strokeDasharray="3 3" />
               <circle cx="38" cy="45" r="3" fill="none" stroke="var(--color-secondary)" strokeWidth="0.8" />
               <circle cx="62" cy="45" r="3" fill="none" stroke="var(--color-secondary)" strokeWidth="0.8" />
               <path d="M44 55 Q50 62, 56 55" fill="none" stroke="var(--color-secondary)" strokeWidth="1" />
-            </svg>
+            </svg> */}
             
             <div className="scanning-overlay-text">
               ANALYZING NODAL FACIAL METRICS...
@@ -92,6 +298,12 @@ const FaceScanner = ({ onScanComplete }) => {
           <div className="scanner-status">
             <div className="pulse-indicator"></div>
             <span>AI BIOMETRIC CHECK RUNNING</span>
+            <Button onClick={captureAndVerify}
+              variant="primary"
+              fullWidth
+              disabled={isVerifying}>
+                  {isVerifying ? "Verifying Face..." : "Verify My Face"}
+            </Button>
           </div>
         </div>
       )}
@@ -119,16 +331,20 @@ const FaceScanner = ({ onScanComplete }) => {
             <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--color-success)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="20 6 9 17 5 13"></polyline>
             </svg>
-            <span>MATCH CONFIRMED (99.85% ACCURACY)</span>
+            <span>Face Verified Successfully</span>
           </div>
 
           <div className="match-actions">
             <Button onClick={handleConfirmMatch} variant="primary" fullWidth>
               Confirm & Log Present
             </Button>
-            <Button onClick={() => setStage('scanning')} variant="outline" fullWidth>
-              Re-Scan Face
-            </Button>
+            <Button
+  onClick={restartCamera}
+  variant="outline"
+  fullWidth
+>
+  Re-Scan Face
+</Button>
           </div>
         </div>
       )}

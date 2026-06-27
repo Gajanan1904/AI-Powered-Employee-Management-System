@@ -128,16 +128,17 @@ a:hover {
 }
 .custom-table th {
   background: var(--bg-app);
-  padding: 14px 20px;
+  padding: 16px 24px;
   font-family: var(--font-header);
   font-weight: 600;
   color: var(--text-secondary);
   border-bottom: 2px solid var(--border-color);
 }
 .custom-table td {
-  padding: 14px 20px;
+  padding: 18px 24px;
   border-bottom: 1px solid var(--border-color);
   color: var(--text-primary);
+  vertical-align: middle;
 }
 .custom-table tr:last-child td {
   border-bottom: none;

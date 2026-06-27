@@ -71,6 +71,7 @@
   object-fit: cover;
   border: 2px solid var(--color-primary);
   box-shadow: 0 0 15px var(--color-primary-glow);
+  font-size: 2rem;
 }
 
 .profile-general-texts {

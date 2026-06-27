@@ -46,11 +46,15 @@ urlpatterns = [
     
     path('api/rewards/', include('rewards.urls')),
     
-    path('api/analytics/', include('analytics_app.urls')),
+    # path('api/analytics/', include('analytics_app.urls')),
     
     path('api/analytics/', include('analytics.urls')),
     
     path('api/ai/', include('ai_prediction.urls')),
     
     path( 'swagger/',schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    
+    path('face-auth/', include('face_auth.urls')),
+    
+    
 ]

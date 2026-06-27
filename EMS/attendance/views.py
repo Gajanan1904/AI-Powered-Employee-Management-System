@@ -7,9 +7,9 @@ from .serializers import AttendanceSerializer
 
 # GET all attendance
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def get_attendance(request):
-    records = Attendance.objects.all()
+    records = Attendance.objects.select_related('employee').order_by('-date', 'employee__id')[:300]
 
     employee_id = request.GET.get('employee')
     date = request.GET.get('date')
@@ -26,7 +26,7 @@ def get_attendance(request):
 
 # POST attendance (Admin only)
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def mark_attendance(request):
     if not request.user.is_staff:
         return Response({'error': 'Only admin can mark attendance'})
@@ -36,3 +36,33 @@ def mark_attendance(request):
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors)
+
+
+@api_view(['POST'])
+def toggle_attendance(request):
+
+    print("REQUEST DATA:", request.data)
+
+    employee_id = request.data.get('id')
+    status = request.data.get('status')
+
+    print("EMPLOYEE ID:", employee_id)
+    print("STATUS:", status)
+
+    try:
+        attendance = Attendance.objects.filter(
+            employee_id=employee_id
+        ).latest('date')
+
+        attendance.status = status
+        attendance.save()
+
+        serializer = AttendanceSerializer(attendance)
+
+        return Response(serializer.data)
+
+    except Attendance.DoesNotExist:
+        return Response(
+            {"error": "Attendance record not found"},
+            status=404
+        )

@@ -19,7 +19,7 @@ def is_hr(employee):
 @api_view(['GET'])
 
 def get_employees(request):
-    employees = Employee.objects.all()
+    employees = Employee.objects.all().order_by('id')
     serializer = EmployeeSerializer(employees, many=True)
     return Response(serializer.data)
 
