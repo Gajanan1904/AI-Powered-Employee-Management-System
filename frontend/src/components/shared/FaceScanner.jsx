@@ -176,7 +176,7 @@ const restartCamera = () => {
     const image = canvas.toDataURL("image/jpeg");
 
     const response = await fetch(
-       `${import.meta.env.VITE_API_BASE}/face-auth/verify/`
+       `${import.meta.env.VITE_API_BASE}/face-auth/verify/`,
       {
         method: "POST",
         headers: {
