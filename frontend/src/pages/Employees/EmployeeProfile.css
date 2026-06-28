@@ -11,30 +11,34 @@
 }
 
 .profile-back-link {
-  background: none;
-  border: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
-  transition: color var(--transition-fast);
+  gap: 8px;
+  transition: all var(--transition-fast);
   outline: none;
 }
 .profile-back-link:hover {
-  color: var(--color-primary);
+  color: #5b5ceb;
+  border-color: #5b5ceb;
 }
 
 .profile-sync-badge {
   font-family: var(--font-header);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: 4px 10px;
-  background-color: var(--color-secondary-glow);
-  color: var(--color-secondary);
-  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  background-color: rgba(91, 92, 235, 0.12);
+  color: #5b5ceb;
+  border-radius: var(--radius-full);
   letter-spacing: 0.05em;
 }
 
@@ -54,6 +58,9 @@
 /* General Stats card */
 .profile-card-general {
   padding: 32px !important;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
 .profile-avatar-row {
@@ -65,12 +72,12 @@
 }
 
 .profile-master-avatar {
-  width: 80px;
-  height: 80px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--color-primary);
-  box-shadow: 0 0 15px var(--color-primary-glow);
+  border: 3px solid #5b5ceb;
+  box-shadow: 0 0 20px rgba(91, 92, 235, 0.25);
   font-size: 2rem;
 }
 
@@ -83,34 +90,35 @@
 .profile-id-tag {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   letter-spacing: 0.05em;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .profile-general-texts h2 {
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  color: var(--text-primary);
 }
 
 .profile-meta-role {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text-secondary);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .profile-dept-badge {
   display: inline-block;
   align-self: flex-start;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: 2px 8px;
-  background-color: var(--color-primary-glow);
-  color: var(--color-primary);
-  border-radius: var(--radius-xs);
+  padding: 3px 10px;
+  background-color: rgba(91, 92, 235, 0.12);
+  color: #5b5ceb;
+  border-radius: var(--radius-full);
   text-transform: uppercase;
 }
 
@@ -123,7 +131,7 @@
 .profile-stat-row {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 12px 0;
   border-bottom: 1px solid var(--border-color);
   font-size: 0.92rem;
 }
@@ -139,7 +147,7 @@
 }
 
 .status-badge-inline {
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 700;
@@ -150,30 +158,34 @@
 
 /* AI platform metrics card */
 .profile-ai-predictions-card {
-  padding: 24px !important;
+  padding: 26px !important;
   text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
 .prediction-card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 .prediction-card-header h4 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
+  color: var(--text-primary);
 }
 .prediction-card-header .ai-icon {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
 }
 
 .prediction-metrics-grid {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   margin-bottom: 20px;
 }
 
@@ -185,26 +197,27 @@
 
 .metric-lbl {
   font-family: var(--font-header);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
   font-weight: 600;
 }
 
 .metric-box strong {
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 800;
+  font-family: var(--font-header);
 }
 .critical-red { color: var(--color-danger); }
 .warning-orange { color: var(--color-warning); }
 .safe-green { color: var(--color-success); }
-.prom-prob-text { color: var(--color-primary); }
+.prom-prob-text { color: #5b5ceb; }
 
 .bar-risk-container {
-  height: 4px;
+  height: 6px;
   background-color: var(--bg-input);
   border-radius: var(--radius-full);
   overflow: hidden;
-  margin-top: 4px;
+  margin-top: 6px;
   width: 100%;
 }
 
@@ -215,19 +228,19 @@
 .bg-danger { background-color: var(--color-danger); }
 .bg-warning { background-color: var(--color-warning); }
 .bg-success { background-color: var(--color-success); }
-.bg-indigo { background-color: var(--color-primary); }
+.bg-indigo { background-color: #5b5ceb; }
 
 .predicted-trajectory-box {
   background-color: var(--bg-input);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
 }
 .predicted-trajectory-box span {
   font-family: var(--font-header);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: var(--color-secondary);
+  color: #5b5ceb;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   display: block;
@@ -235,29 +248,33 @@
 }
 .predicted-trajectory-box p {
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--text-secondary);
 }
 
 /* Right Panel Styles */
 .right-panel-title {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
+  padding-bottom: 14px;
   text-align: left;
+  color: var(--text-primary);
 }
 
 .profile-performance-card {
   padding: 28px !important;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
 .performance-kpi-split {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
 }
 
 .circular-score-dial-box {
@@ -268,7 +285,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   text-align: left;
 }
 
@@ -281,7 +298,7 @@
 .kpi-info-row {
   display: flex;
   justify-content: space-between;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 .kpi-lbl {
   font-family: var(--font-body);
@@ -291,6 +308,7 @@
 .kpi-val {
   font-family: var(--font-header);
   font-weight: 700;
+  color: var(--text-primary);
 }
 
 .kpi-bar-bg {
@@ -308,19 +326,22 @@
 /* Badging showcases */
 .profile-badges-card {
   padding: 28px !important;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
 .badges-unlocked-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
   gap: 16px;
 }
 
 .earned-badge-card {
   background: var(--bg-input);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 16px;
+  border-radius: var(--radius-lg);
+  padding: 18px 14px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -329,12 +350,12 @@
 }
 .earned-badge-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(99, 102, 241, 0.25);
+  border-color: rgba(91, 92, 235, 0.3);
   background-color: var(--bg-card);
 }
 
 .earned-badge-emoji {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   margin-bottom: 8px;
   display: flex;
   align-items: center;
@@ -344,13 +365,13 @@
 .earned-badge-name {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--text-primary);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .earned-badge-meta {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--color-success);
   font-weight: 600;
 }

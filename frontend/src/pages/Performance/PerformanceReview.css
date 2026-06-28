@@ -11,7 +11,7 @@
   align-items: start;
 }
 
-/* Requirement 1: Keep left KPI Evaluation panel fixed */
+/* Left KPI Evaluation panel */
 .performance-evaluation-form-panel {
   padding: 28px !important;
   display: flex;
@@ -19,12 +19,18 @@
   position: sticky;
   top: 90px;
   z-index: 20;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
 .performance-roster-list-panel {
   padding: 28px !important;
   display: flex;
   flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
 .performance-block-title {
@@ -32,8 +38,9 @@
   font-weight: 700;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
+  padding-bottom: 14px;
   text-align: left;
+  color: var(--text-primary);
 }
 
 .evaluation-kpi-form {
@@ -43,7 +50,7 @@
 }
 
 .select-emp-group {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .live-performance-donut-container {
@@ -51,8 +58,8 @@
   justify-content: center;
   margin-bottom: 24px;
   background-color: var(--bg-input);
-  border-radius: var(--radius-md);
-  padding: 16px;
+  border-radius: var(--radius-lg);
+  padding: 20px;
   border: 1px solid var(--border-color);
 }
 
@@ -60,7 +67,7 @@
 .evaluation-sliders-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
   margin-bottom: 28px;
 }
 
@@ -73,7 +80,7 @@
 .slider-meta {
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
 .slider-name {
@@ -100,36 +107,36 @@
 
 .kpi-slider-input::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: #ffffff;
-  border: 2px solid currentColor;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 3px solid currentColor;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: transform var(--transition-fast);
 }
 
 .kpi-slider-input::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 /* Color schemes for sliders */
-.range-indigo { color: var(--color-primary); }
+.range-indigo { color: #5b5ceb; }
 .range-indigo::-webkit-slider-runnable-track { background: var(--border-color); }
-.range-cyan { color: var(--color-secondary); }
-.range-purple { color: #a855f7; }
-.range-rose { color: #e11d48; }
+.range-cyan { color: #06b6d4; }
+.range-purple { color: #8b5cf6; }
+.range-rose { color: #f43f5e; }
 
-/* Requirement 2 & 3: Make table independently scrollable with max-height ~600px */
+/* Scrollable table body container */
 .performance-roster-list-panel .table-responsive-container {
   max-height: 600px;
   overflow-y: auto;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
   position: relative;
 }
 
-/* Requirement 4: Keep table header fixed while scrolling */
+/* Fixed table header */
 .performance-roster-list-panel .custom-table {
   border-collapse: separate;
   border-spacing: 0;
@@ -146,16 +153,16 @@
 .profile-cell-mini {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-align: left;
 }
 
 .avatar-mini {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid var(--border-color);
+  border: 2px solid var(--border-color);
   font-size: 1rem;
 }
 
@@ -176,21 +183,21 @@
   line-height: 1.2;
 }
 .clickable-name:hover {
-  color: var(--color-primary);
+  color: #5b5ceb;
   text-decoration: underline;
 }
 
 .profile-meta-sub {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   font-weight: 500;
 }
 
 .highlighted-row {
-  background-color: var(--color-primary-glow) !important;
+  background-color: rgba(91, 92, 235, 0.08) !important;
 }
 .highlighted-row td {
-  border-color: rgba(99, 102, 241, 0.2);
+  border-color: rgba(91, 92, 235, 0.2);
 }
 
 @media (max-width: 1024px) {

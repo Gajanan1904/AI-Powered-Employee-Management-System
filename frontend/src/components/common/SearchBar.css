@@ -15,7 +15,7 @@
 
 .search-icon {
   position: absolute;
-  left: 14px;
+  left: 16px;
   color: var(--text-muted);
   pointer-events: none;
   width: 18px;
@@ -24,12 +24,12 @@
 
 .search-input {
   width: 100%;
-  padding: 12px 16px 12px 42px;
+  padding: 11px 18px 11px 44px;
   font-family: var(--font-body);
   font-size: 0.95rem;
   background-color: var(--bg-input);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   color: var(--text-primary);
   outline: none;
   transition: all var(--transition-fast);
@@ -46,13 +46,13 @@
 }
 
 .search-filter-wrapper select {
-  padding: 12px 24px 12px 16px;
+  padding: 11px 24px 11px 16px;
   font-family: var(--font-header);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   background-color: var(--bg-input);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   color: var(--text-primary);
   outline: none;
   cursor: pointer;

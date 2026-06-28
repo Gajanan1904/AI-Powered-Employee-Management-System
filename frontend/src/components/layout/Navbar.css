@@ -1,11 +1,11 @@
 .navbar-container {
-  height: 70px;
+  height: 72px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 28px !important;
-  background: var(--glass-bg);
+  padding: 0 32px !important;
+  background: var(--bg-nav);
   border: none;
   border-bottom: 1px solid var(--border-color);
   border-radius: 0 !important;
@@ -13,6 +13,7 @@
   top: 0;
   z-index: 90;
   box-shadow: var(--shadow-sm);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .navbar-left {
@@ -23,20 +24,27 @@
 
 .mobile-menu-toggle-btn {
   display: none;
-  background: none;
-  border: none;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
   color: var(--text-primary);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
   align-items: center;
   justify-content: center;
   outline: none;
+  transition: all var(--transition-fast);
+}
+
+.mobile-menu-toggle-btn:hover {
+  background-color: var(--border-color);
 }
 
 .navbar-page-title {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
 .navbar-right {
@@ -52,9 +60,9 @@
 .nav-action-icon-btn {
   background: var(--bg-input);
   border: 1px solid var(--border-color);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
   color: var(--text-secondary);
   cursor: pointer;
   display: flex;
@@ -68,7 +76,7 @@
 .nav-action-icon-btn:hover, .nav-action-icon-btn.active {
   background-color: var(--border-color);
   color: var(--text-primary);
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .navbar-badge-pulse {
@@ -79,7 +87,7 @@
   height: 8px;
   border-radius: 50%;
   background-color: var(--color-danger);
-  box-shadow: 0 0 0 2px var(--bg-card);
+  box-shadow: 0 0 0 2px var(--bg-nav);
   animation: badge-pulse 1.5s infinite ease-in-out;
 }
 
@@ -93,24 +101,24 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: none;
-  border: none;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
   cursor: pointer;
-  padding: 4px;
-  border-radius: var(--radius-md);
-  transition: background-color var(--transition-fast);
+  padding: 5px 12px 5px 5px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
   outline: none;
 }
 
 .navbar-profile-trigger:hover {
-  background-color: var(--bg-input);
+  border-color: var(--color-primary);
 }
 
 .navbar-user-avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(135deg, #5b5ceb, #7c6cf5);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -118,7 +126,6 @@
   font-family: var(--font-header);
   font-weight: 700;
   font-size: 0.9rem;
-  border: 1.5px solid var(--color-primary);
   flex-shrink: 0;
   user-select: none;
 }
@@ -127,13 +134,14 @@
   font-family: var(--font-header);
   font-weight: 600;
   color: var(--text-primary);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
 .profile-chevron {
   color: var(--text-muted);
   transition: transform var(--transition-fast);
 }
+
 .profile-chevron.rotate {
   transform: rotate(180deg);
 }

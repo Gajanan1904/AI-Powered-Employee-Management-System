@@ -1,90 +1,94 @@
-/* Requirement 3: Reduced vertical spacing between sections */
 .rewards-dashboard-root {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .rewards-block-title {
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 8px;
+  padding-bottom: 10px;
   text-align: left;
+  color: var(--text-primary);
 }
 
 /* Podium section */
 .rewards-podium-section {
-  padding: 20px !important;
+  padding: 24px !important;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
 .podium-container {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 24px;
-  min-height: 180px;
-  padding-top: 10px;
+  gap: 28px;
+  min-height: 200px;
+  padding-top: 14px;
 }
 
 .podium-spot {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 140px;
+  width: 145px;
 }
 
 .podium-avatar-wrapper {
   position: relative;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .podium-avatar-img {
-  width: 64px;
-  height: 64px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid transparent;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 .gold-avatar-img {
-  width: 76px;
-  height: 76px;
-  font-size: 1.8rem;
+  width: 80px;
+  height: 80px;
+  font-size: 1.9rem;
 }
 
 .medal-tag {
   position: absolute;
   bottom: -4px;
   right: -4px;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   color: #ffffff;
   font-weight: 700;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .podium-name {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   color: var(--text-primary);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .podium-pts {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  color: var(--color-primary);
-  margin-bottom: 8px;
+  color: #5b5ceb;
+  margin-bottom: 10px;
 }
 
 .podium-pedestal {
@@ -94,52 +98,55 @@
   justify-content: center;
   font-family: var(--font-header);
   font-weight: 800;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   letter-spacing: 0.05em;
   color: #ffffff;
-  border-top-left-radius: var(--radius-sm);
-  border-top-right-radius: var(--radius-sm);
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
 }
 
 /* Spot Gold */
-.spot-gold .podium-avatar-img { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
+.spot-gold .podium-avatar-img { border-color: #fbbf24; box-shadow: 0 0 20px rgba(251, 191, 36, 0.35); }
 .spot-gold .medal-tag { background-color: #fbbf24; }
-.pedestal-1 { height: 75px; background: linear-gradient(180deg, #fbbf24, #d97706); }
+.pedestal-1 { height: 80px; background: linear-gradient(180deg, #fbbf24, #d97706); }
 
 /* Spot Silver */
-.spot-silver .podium-avatar-img { border-color: #94a3b8; box-shadow: 0 0 15px rgba(148, 163, 184, 0.2); }
+.spot-silver .podium-avatar-img { border-color: #94a3b8; box-shadow: 0 0 20px rgba(148, 163, 184, 0.25); }
 .spot-silver .medal-tag { background-color: #94a3b8; }
-.pedestal-2 { height: 50px; background: linear-gradient(180deg, #94a3b8, #64748b); }
+.pedestal-2 { height: 55px; background: linear-gradient(180deg, #94a3b8, #64748b); }
 
 /* Spot Bronze */
-.spot-bronze .podium-avatar-img { border-color: #b45309; box-shadow: 0 0 15px rgba(180, 83, 9, 0.2); }
+.spot-bronze .podium-avatar-img { border-color: #b45309; box-shadow: 0 0 20px rgba(180, 83, 9, 0.25); }
 .spot-bronze .medal-tag { background-color: #b45309; }
-.pedestal-3 { height: 35px; background: linear-gradient(180deg, #b45309, #78350f); }
+.pedestal-3 { height: 40px; background: linear-gradient(180deg, #b45309, #78350f); }
 
 /* Badges catalog directory */
 .rewards-badges-catalog-section {
-  padding: 20px !important;
+  padding: 24px !important;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
 .badges-intro-meta {
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--text-secondary);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   text-align: left;
 }
 
 .achieve-badges-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: 16px;
 }
 
 .badge-catalog-card {
   background-color: var(--bg-input);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 12px;
+  border-radius: var(--radius-lg);
+  padding: 16px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -149,13 +156,13 @@
 
 .badge-catalog-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(99, 102, 241, 0.25);
+  border-color: rgba(91, 92, 235, 0.3);
   background-color: var(--bg-card);
 }
 
 .badge-catalog-emoji {
-  font-size: 2rem;
-  margin-bottom: 6px;
+  font-size: 2.2rem;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,14 +171,14 @@
 .badge-catalog-name {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-primary);
   margin-bottom: 4px;
 }
 
 .badge-details-link {
-  font-size: 0.7rem;
-  color: var(--color-primary);
+  font-size: 0.72rem;
+  color: #5b5ceb;
   font-weight: 600;
 }
 
@@ -179,29 +186,33 @@
 .rewards-split-grid {
   display: grid;
   grid-template-columns: 7.2fr 4.8fr;
-  gap: 18px;
-  align-items: start; /* Requirement 2: Prevents card stretching */
+  gap: 20px;
+  align-items: start;
 }
 
 .rewards-standings-panel {
-  padding: 20px !important;
+  padding: 24px !important;
   display: flex;
   flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
-/* Requirement 2: Award form fits content height */
 .rewards-award-panel {
-  padding: 20px !important;
+  padding: 24px !important;
   display: flex;
   flex-direction: column;
   height: fit-content;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl) !important;
 }
 
-/* Requirement 1: Independently scrollable leaderboard table max-height 450px */
 .rewards-standings-panel .table-responsive-container {
   max-height: 450px;
   overflow-y: auto;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
   position: relative;
 }
@@ -222,17 +233,17 @@
 .profile-cell-mini {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-align: left;
 }
 
 .avatar-mini {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid var(--border-color);
-  font-size: 0.95rem;
+  border: 2px solid var(--border-color);
+  font-size: 1rem;
 }
 
 .profile-cell-texts {
@@ -245,13 +256,13 @@
 .profile-name-bold {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   color: var(--text-primary);
   line-height: 1.2;
 }
 
 .profile-meta-sub {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -259,33 +270,32 @@
 .rank-badge {
   font-family: var(--font-header);
   font-weight: 700;
-  font-size: 0.8rem;
-  padding: 2px 6px;
+  font-size: 0.82rem;
+  padding: 3px 8px;
   border-radius: var(--radius-xs);
 }
-.rank-1 { background-color: rgba(251, 191, 36, 0.1); color: #d97706; }
-.rank-2 { background-color: rgba(148, 163, 184, 0.1); color: #475569; }
-.rank-3 { background-color: rgba(180, 83, 9, 0.1); color: #b45309; }
+.rank-1 { background-color: rgba(251, 191, 36, 0.12); color: #d97706; }
+.rank-2 { background-color: rgba(148, 163, 184, 0.12); color: #475569; }
+.rank-3 { background-color: rgba(180, 83, 9, 0.12); color: #b45309; }
 
 .standings-pts-text {
   font-family: var(--font-header);
   font-weight: 700;
-  color: var(--color-primary);
+  color: #5b5ceb;
 }
 
 .badge-tag-inline {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background-color: var(--bg-input);
   border: 1.5px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 
-/* Requirement 2: Award form fields compact spacing and button placement */
 .award-points-form {
   text-align: left;
   display: flex;
@@ -293,10 +303,9 @@
 }
 
 .award-points-form .form-group {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
-/* Badge criteria modal */
 .badge-criteria-modal-body {
   display: flex;
   flex-direction: column;
@@ -305,40 +314,40 @@
 }
 
 .criteria-emoji {
-  font-size: 3rem;
-  margin-bottom: 10px;
+  font-size: 3.2rem;
+  margin-bottom: 12px;
 }
 
 .criteria-desc {
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.98rem;
+  line-height: 1.55;
   color: var(--text-secondary);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .criteria-metric-block {
   width: 100%;
   background-color: var(--bg-input);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 14px;
+  border-radius: var(--radius-lg);
+  padding: 16px;
   text-align: left;
 }
 
 .criteria-metric-block strong {
   display: block;
   font-family: var(--font-header);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .criteria-metric-block ul {
-  padding-left: 18px;
+  padding-left: 20px;
   font-family: var(--font-body);
-  font-size: 0.82rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  line-height: 1.55;
   color: var(--text-secondary);
 }
 

@@ -1,111 +1,117 @@
-/* Core Variables Design System */
+/* Core Variables Design System - SaaS Reference Theme */
 :root {
   /* Common System Values */
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-header: 'Outfit', sans-serif;
   
   --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   
-  --radius-xs: 4px;
+  --radius-xs: 6px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* LIGHT MODE (Default) */
+  /* LIGHT MODE (Default - Reference Theme) */
   --bg-app: #f8fafc;
   --bg-card: #ffffff;
-  --bg-sidebar: #0f172a; /* Dark theme sidebar even in light mode for enterprise contrast */
-  --bg-sidebar-hover: rgba(255, 255, 255, 0.08);
-  --bg-sidebar-active: #6366f1;
-  --bg-nav: rgba(255, 255, 255, 0.8);
+  --bg-sidebar: linear-gradient(180deg, #312e81 0%, #4f46e5 100%);
+  --bg-sidebar-hover: rgba(255, 255, 255, 0.12);
+  --bg-sidebar-active: #ffffff;
+  --bg-nav: #ffffff;
   --bg-input: #f1f5f9;
   
   --border-color: #e2e8f0;
-  --border-focus: #6366f1;
+  --border-focus: #4f46e5;
   
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-sidebar: #94a3b8;
-  --text-sidebar-active: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --text-sidebar: rgba(255, 255, 255, 0.82);
+  --text-sidebar-active: #312e81;
   
   /* Brand Accents */
-  --color-primary: #6366f1; /* Indigo */
+  --color-primary: #312e81;
   --color-primary-hover: #4f46e5;
-  --color-primary-glow: rgba(99, 102, 241, 0.15);
+  --color-primary-gradient: linear-gradient(135deg, #5b5ceb 0%, #7c6cf5 100%);
+  --color-primary-glow: rgba(91, 92, 235, 0.2);
   
-  --color-secondary: #06b6d4; /* Cyan */
-  --color-secondary-hover: #0891b2;
-  --color-secondary-glow: rgba(6, 182, 212, 0.15);
+  --color-secondary: #4f46e5;
+  --color-secondary-hover: #4338ca;
+  --color-secondary-glow: rgba(79, 70, 229, 0.2);
   
-  --color-success: #10b981; /* Emerald */
+  --color-success: #10b981;
   --color-success-bg: #ecfdf5;
   --color-success-border: #a7f3d0;
   
-  --color-warning: #f59e0b; /* Amber */
+  --color-warning: #f59e0b;
   --color-warning-bg: #fffbeb;
   --color-warning-border: #fde68a;
   
-  --color-danger: #f43f5e; /* Rose */
+  --color-danger: #f43f5e;
   --color-danger-bg: #fff1f2;
   --color-danger-border: #fecdd3;
 
   /* Glassmorphism Defaults */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --glass-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
   
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.06), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
   
-  --card-glow: 0 0 20px 0 rgba(99, 102, 241, 0.03);
+  --card-glow: 0 0 20px rgba(91, 92, 235, 0.04);
 }
 
 /* DARK MODE OVERRIDES */
 .dark-theme {
-  --bg-app: #080c16;
+  --bg-app: #0f172a;
   --bg-card: #111827;
-  --bg-sidebar: #0f172a;
-  --bg-sidebar-hover: rgba(255, 255, 255, 0.06);
-  --bg-sidebar-active: #6366f1;
-  --bg-nav: rgba(17, 24, 39, 0.8);
+  --bg-sidebar: linear-gradient(180deg, #1a124b 0%, #312e81 100%);
+  --bg-sidebar-hover: rgba(255, 255, 255, 0.08);
+  --bg-sidebar-active: #ffffff;
+  --bg-nav: #111827;
   --bg-input: #1f2937;
   
-  --border-color: rgba(255, 255, 255, 0.07);
-  --border-focus: #6366f1;
+  --border-color: #1f2937;
+  --border-focus: #7c6cf5;
   
-  --text-primary: #f9fafb;
+  --text-primary: #f8fafc;
   --text-secondary: #9ca3af;
   --text-muted: #6b7280;
-  --text-sidebar: #9ca3af;
-  --text-sidebar-active: #ffffff;
+  --text-sidebar: rgba(248, 250, 252, 0.8);
+  --text-sidebar-active: #1a124b;
   
-  /* Brand Accents Glows */
-  --color-primary-glow: rgba(99, 102, 241, 0.35);
-  --color-secondary-glow: rgba(6, 182, 212, 0.35);
+  --color-primary: #7c6cf5;
+  --color-primary-hover: #6366f1;
+  --color-primary-gradient: linear-gradient(135deg, #5b5ceb 0%, #7c6cf5 100%);
+  --color-primary-glow: rgba(124, 108, 245, 0.3);
   
-  --color-success-bg: rgba(16, 185, 129, 0.1);
-  --color-success-border: rgba(16, 185, 129, 0.2);
+  --color-secondary: #6366f1;
+  --color-secondary-hover: #4f46e5;
+  --color-secondary-glow: rgba(99, 102, 241, 0.3);
   
-  --color-warning-bg: rgba(245, 158, 11, 0.1);
-  --color-warning-border: rgba(245, 158, 11, 0.2);
+  --color-success-bg: rgba(16, 185, 129, 0.12);
+  --color-success-border: rgba(16, 185, 129, 0.25);
   
-  --color-danger-bg: rgba(244, 63, 94, 0.1);
-  --color-danger-border: rgba(244, 63, 94, 0.2);
+  --color-warning-bg: rgba(245, 158, 11, 0.12);
+  --color-warning-border: rgba(245, 158, 11, 0.25);
+  
+  --color-danger-bg: rgba(244, 63, 94, 0.12);
+  --color-danger-border: rgba(244, 63, 94, 0.25);
 
   /* Premium Dark Glassmorphism */
-  --glass-bg: rgba(17, 24, 39, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.06);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(17, 24, 39, 0.85);
+  --glass-border: rgba(31, 41, 55, 0.8);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.45);
   
-  --card-glow: 0 0 30px 0 rgba(99, 102, 241, 0.08);
+  --card-glow: 0 0 25px rgba(124, 108, 245, 0.08);
 }
