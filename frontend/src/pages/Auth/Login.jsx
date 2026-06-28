@@ -93,12 +93,12 @@ const Login = () => {
 
           <form onSubmit={handleSubmit} className="login-form-element">
             <Input
-              label="Email Address"
-              type="email"
-              name="email"
+              label="username"
+              type="text"
+              name="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g. admin@enterprise.com"
+              placeholder="e.g. admin"
               required
             />
 
