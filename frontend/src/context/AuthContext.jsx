@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -35,35 +36,47 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (username, password, rememberMe = false) => {
-    setLoading(true);
-    // Simulate API request delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
+  setLoading(true);
 
-    // Simple mock authorization
-    if (username === 'admin@enterprise.com' && password === 'admin123') {
-      const mockToken = 'mock-jwt-token-xyz-12345';
-      const mockUser = {
-        id: '1',
-        name: 'Gajanan Bidwai',
-        email: 'admin@enterprise.com',
-        role: 'Chief HR Officer',
-        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120'
-      };
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/token/`,
+      {
+        username,
+        password,
+      }
+    );
 
-      setToken(mockToken);
-      setUser(mockUser);
+    const accessToken = response.data.access;
 
-      const storage = rememberMe ? localStorage : sessionStorage;
-      storage.setItem('token', mockToken);
-      storage.setItem('user', JSON.stringify(mockUser));
-      
-      setLoading(false);
-      return { success: true };
-    }
+    const userData = {
+      name: "Gajanan Bidwai",
+      email: username,
+      role: "Chief HR Officer",
+    };
+
+    setToken(accessToken);
+    setUser(userData);
+
+    const storage = rememberMe ? localStorage : sessionStorage;
+
+    storage.setItem("token", accessToken);
+    storage.setItem("user", JSON.stringify(userData));
 
     setLoading(false);
-    return { success: false, message: 'Invalid credentials. Use admin@enterprise.com / admin123' };
-  };
+
+    return {
+      success: true,
+    };
+  } catch (err) {
+    setLoading(false);
+
+    return {
+      success: false,
+      message: "Invalid username or password",
+    };
+  }
+};
 
   const logout = () => {
     setToken(null);
