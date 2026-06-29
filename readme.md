@@ -1,4 +1,5 @@
 # 🚀 Employee Hub – AI-Powered Workforce Management Platform
+Live : https://ai-powered-employee-management-syst.vercel.app/
 
 Employee Hub is a full-stack Employee Management System that streamlines HR operations by combining employee management, attendance tracking, performance evaluation, rewards management, analytics, and AI-powered predictions into a single platform.
 
